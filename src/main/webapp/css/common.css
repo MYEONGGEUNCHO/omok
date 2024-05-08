@@ -37,14 +37,29 @@ main > * {
   flex-direction: column;
   font: 40px;
 }
+.title {
+  position: absolute;
+  top: 10%;
+  font-size: 40px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.title > img {
+  width: 100px;
+  margin-right: 10px;
+}
+
 /*기본 핑크 배경에 상단 탑 바, 버튼 모양*/
 .main_container {
   background-image: linear-gradient(to bottom, #ffffff 8%, #ffd7ce 8%);
   border: 1px solid #ccaca6;
+  border-radius: 3%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   width: 80%;
   padding-top: 5%;
-  position: relative;
+  position: absolute;
+  z-index: -1;
 }
 
 .main_container .close_btn {
@@ -79,6 +94,9 @@ button:hover {
 .font_size3 {
   font-size: 32px;
 }
+.font_size4 {
+  font-size: 48px;
+}
 /*가운데 정렬*/
 .center {
   text-align: center;
@@ -100,4 +118,40 @@ label {
 /*a 태그 기본 설정*/
 a {
   text-decoration: none;
+}
+/*헤더 로고*/
+#mini_logo {
+  width: 60px;
+}
+/***************************** 임시 저장*/
+.main_container {
+  width: 50%;
+}
+
+#login_form,
+#register_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+}
+
+#login_form > *,
+#register_form > * {
+  margin-top: 3%;
+  width: 100%;
+  padding: 10px;
+  height: 40px;
+  width: 70%;
+}
+
+#login_form > #user_info {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
+#register_form > input[name="id_check"] {
+  height: 18px;
 }

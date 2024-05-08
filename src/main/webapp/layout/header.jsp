@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <header>
-  <img src="<%=request.getContextPath()%>/images/mini_logo.png" id="mini_logo" alt="mini_logo" />
+<a href="<%=request.getContextPath()%>/index.jsp">
+  <img src="<%=request.getContextPath()%>/images/logo.png" id="mini_logo" alt="mini_logo" />
+  </a>
   <table>
     <tr>
       <td>
