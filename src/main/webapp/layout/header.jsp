@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
           <li>마이페이지</li>
         </ul>
       </td>
-      <td>로그인/로그아웃</td>
+      <td>로그아웃</td>
     </tr>
   </table>
 </header>

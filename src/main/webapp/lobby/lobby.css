@@ -7,8 +7,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #c9c9c9;
-  border-radius: 3%;
 }
 #lobby_list > li > a {
   margin: 10px;

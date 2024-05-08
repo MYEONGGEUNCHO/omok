@@ -21,7 +21,9 @@
 	<%@ include file="layout/header.jsp"%>
 	<%--//main 부분을 ajax로 가져와서 동적으로 변경 
 	 //--> 메인(로그인)부터 회원가입, 로그인 완료 화면까지 --%>
-	<%@	include file="login/main.jsp"%>
+	<main>
+		<%@	include file="login/registerForm.jsp"%>
+	</main>
 	<%@ include file="layout/footer.jsp"%>
 </body>
 </html>
