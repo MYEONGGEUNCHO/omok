@@ -22,7 +22,10 @@
 </head>
 <body>
 	<%@ include file="../layout/header.jsp"%>
+	<main>
+	<%@ include file="../layout/mainContainer.jsp" %>
 	<%@ include file="lobbyList.jsp"%>
+	</main>
 	<%@ include file="../layout/footer.jsp"%>
 </body>
 </html>

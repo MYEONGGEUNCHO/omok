@@ -1,0 +1,118 @@
+#game_container {
+	display: flex;
+	height: 80%;
+	width: 100%;
+	flex: auto;
+	align-items: center;
+	flex: auto;
+}
+
+#game_container>* {
+	margin: 1%;
+}
+
+.player_side {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 20%;
+}
+
+.player_side>* {
+	margin-bottom: 10%;
+}
+
+.player_card {
+    height: 35vh;
+    border: 5px solid #CCACA6;
+    background: #FFD7CF;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.player_card>* {
+	margin: 1% 0;
+}
+
+.player_card>.profile {
+	width: 92%;
+	height: 60%;
+	background: white;
+}
+.player_card > .nickname {
+	font-size: 2em;
+	font-weight: 700;
+	text-align:center;
+	line-height: 2.5em;
+}
+.player_card > .winlose {
+	font-size: 1.5em;
+	text-align:center;
+	
+}
+
+#buttons {
+	display: flex;
+	justify-content: space-between;
+}
+
+#buttons>* {
+	width: 30%;
+	padding: 2%;
+}
+
+#play_container {
+	width: 50%;
+	overflow: hidden;
+	position: relative;
+}
+
+.omok_board {
+	width: 100%;
+	height: 100%;
+	background: #CCACA6;
+	border: 6px solid #7F6B67;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-collapse: separate;
+	table-layout: fixed;
+}
+
+.cell {
+	border: 1.5px solid #7F6B67;
+	width: 3vw;
+	height: 3vw;
+	table-layout: fixed;
+}
+
+.game_chat {
+	width: 25%;
+	height: 45em;
+	background: #FFD7CF;
+}
+
+.my_chat {
+	width: 95%;
+	height: 2em;
+	text-align: right;
+	background: #FCFFE7;
+}
+
+.your_chat {
+	width: 95%;
+	height: 2em;
+	text-align: left;
+	background: #F9FCFF;
+}
+
+.input_chat {
+	width: 95%;
+	height: 3em;
+	border-radius: 15px;
+	background: #F9FCFF;
+}
+
+.send_btn {
+	
+}

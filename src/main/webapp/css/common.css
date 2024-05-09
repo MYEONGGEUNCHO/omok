@@ -52,24 +52,28 @@ main > * {
 
 /*기본 핑크 배경에 상단 탑 바, 버튼 모양*/
 .main_container {
-  background-image: linear-gradient(to bottom, #ffffff 8%, #ffd7ce 8%);
+  background-image: linear-gradient(to bottom, #ffffff 25px, #ffd7ce 25px);
   border: 1px solid #ccaca6;
   border-radius: 3%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  width: 80%;
-  padding-top: 5%;
+  height: 50%;
+  width: 50%;
+  padding: 5%;
+  margin-top: 5%;
   position: absolute;
   z-index: -1;
 }
 
 .main_container .close_btn {
   position: absolute;
+  width: 15px;
   left: 95%;
-  top: 1%;
+  top: 0.7%;
 }
 
 /*버튼 기본값*/
 input[type="submit"],
+input[type="button"],
 button {
   box-sizing: border-box;
   background: #f9fcff;
@@ -78,6 +82,7 @@ button {
 }
 
 input[type="submit"]:hover,
+input[type="button"]:hover,
 button:hover {
   background: #7c7e7f;
   color: #f9fcff;
@@ -124,9 +129,6 @@ a {
   width: 60px;
 }
 /***************************** 임시 저장*/
-.main_container {
-  width: 50%;
-}
 
 #login_form,
 #register_form {
@@ -134,7 +136,7 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 70%;
+  width: 40%;
 }
 
 #login_form > *,
@@ -143,7 +145,7 @@ a {
   width: 100%;
   padding: 10px;
   height: 40px;
-  width: 70%;
+  width: 100%;
 }
 
 #login_form > #user_info {
@@ -152,6 +154,26 @@ a {
   width: 70%;
 }
 
-#register_form > input[name="id_check"] {
-  height: 18px;
+/* 테스트 부분*/
+.circle {
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  border-radius: 50%; /* 원 모양 만들기 */
+  position: relative;
+}
+
+.x-button {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 가운데 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%; /* 원 모양 만들기 */
+  cursor: pointer;
 }
