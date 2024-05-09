@@ -1,118 +1,236 @@
 #game_container {
-	display: flex;
-	height: 80%;
-	width: 100%;
-	flex: auto;
-	align-items: center;
-	flex: auto;
+  display: flex;
+  height: 80%;
+  width: 100%;
+  flex: auto;
+  align-items: center;
+  flex: auto;
 }
 
-#game_container>* {
-	margin: 1%;
+#game_container > * {
+  margin: 1%;
 }
 
 .player_side {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
 }
 
-.player_side>* {
-	margin-bottom: 10%;
+.player_side > * {
+  margin-bottom: 10%;
 }
 
 .player_card {
-    height: 35vh;
-    border: 5px solid #CCACA6;
-    background: #FFD7CF;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
+  width: 25vh;
+  height: 35vh;
+  border: 5px solid #ccaca6;
+  background: #ffd7cf;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.player_card>* {
-	margin: 1% 0;
+.player_card > * {
+  margin: 1% 0;
 }
 
-.player_card>.profile {
-	width: 92%;
-	height: 60%;
-	background: white;
+.player_card > .profile {
+  width: 92%;
+  height: 60%;
+  background: white;
 }
 .player_card > .nickname {
-	font-size: 2em;
-	font-weight: 700;
-	text-align:center;
-	line-height: 2.5em;
+  font-size: 2em;
+  font-weight: 700;
+  text-align: center;
+  line-height: 2.5em;
 }
 .player_card > .winlose {
-	font-size: 1.5em;
-	text-align:center;
-	
+  font-size: 1.5em;
+  text-align: center;
 }
 
-#buttons {
-	display: flex;
-	justify-content: space-between;
+#game_buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-#buttons>* {
-	width: 30%;
-	padding: 2%;
+#game_buttons > * {
+  width: 30%;
+  padding: 2%;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+    inset 0px -2px 2px rgba(0, 0, 0, 0.25);
+  border: 1px solid #7f6b67;
+  box-sizing: border-box;
 }
 
 #play_container {
-	width: 50%;
-	overflow: hidden;
-	position: relative;
+  width: 50%;
+  overflow: hidden;
+  position: relative;
 }
 
 .omok_board {
-	width: 100%;
-	height: 100%;
-	background: #CCACA6;
-	border: 6px solid #7F6B67;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	border-collapse: separate;
-	table-layout: fixed;
+  width: 100%;
+  height: 100%;
+  background: #ccaca6;
+  border: 6px solid #7f6b67;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-collapse: separate;
+  table-layout: fixed;
+  border-radius: 20px;
 }
 
 .cell {
-	border: 1.5px solid #7F6B67;
-	width: 3vw;
-	height: 3vw;
-	table-layout: fixed;
+  border: 1.5px solid #7f6b67;
+  width: 3vw;
+  height: 3vw;
+  table-layout: fixed;
+}
+
+#chat_container {
+  width: 25%;
+  height: 50em;
+  min-height: 720px;
+  background: #ffd7cf;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .game_chat {
-	width: 25%;
-	height: 45em;
-	background: #FFD7CF;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+}
+.game_chat > div {
+  margin-top: 2%;
+  padding: 2%;
+}
+.game_chat * {
+  color: black;
+}
+.my_chat {
+  margin-left: 5%;
+  text-align: right;
+  background: #fcffe7;
+  width: 100%;
+  line-height: 30px;
+}
+#your_chat_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 5%;
 }
 
-.my_chat {
-	width: 95%;
-	height: 2em;
-	text-align: right;
-	background: #FCFFE7;
+.your_profile {
+  background: white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
 }
 
 .your_chat {
-	width: 95%;
-	height: 2em;
-	text-align: left;
-	background: #F9FCFF;
+  text-align: left;
+  background: #f9fcff;
+  width: 65%;
+  margin-left: 2%;
+  padding: 2%;
+  line-height: 30px;
 }
 
 .input_chat {
-	width: 95%;
-	height: 3em;
-	border-radius: 15px;
-	background: #F9FCFF;
+  width: 95%;
+  height: 6em;
+  margin-bottom: 3%;
+  border-radius: 15px;
+  background: #f9fcff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+.chat {
+  width: 95%;
+  height: 6em;
+  border-radius: 15px;
+
+  background: #f9fcff;
+}
 .send_btn {
-	
+  padding-right: 2%;
+  width: 20px;
+}
+
+#black_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 120%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 1;
+  margin: 0%;
+}
+
+.alert {
+  background-image: linear-gradient(to bottom, #ffffff 25px, #ffd7ce 25px);
+  border: 1px solid #ccaca6;
+  border-radius: 3%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 5%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.alert > * {
+  margin: 2%;
+  width: 80%;
+}
+.alert > .close_btn {
+  margin: 0;
+}
+
+.profile {
+  width: 16em;
+  height: 10em;
+  background: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile_img {
+  height: 70%;
+  position: absolute;
+}
+
+.congraturations {
+  font-size: 2em;
+  text-align: center;
+  width: 15em;
+}
+.ok_btn {
+  margin-top: 5%;
+  line-height: 2em;
+  font-size: 1.5em;
+  width: 4em;
+}
+b {
+  font-size: 1.1em;
+  font-weight: 700;
 }

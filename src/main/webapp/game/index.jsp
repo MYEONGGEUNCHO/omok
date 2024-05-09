@@ -40,16 +40,16 @@
 					<div class="nickname">플레이어2</div>
 					<div class="winlose">0승 6패</div>
 				</div>
-				<div id="buttons">
-					<button id="back">
+				<div id="game_buttons">
+					<button id="back" type="button">
 						<img src="<%=request.getContextPath()%>/images/back.png" />
-					</button>
-					<button id="sorry">
+					</button>나가기
+					<button id="sorry" type="button">
 						<img src="<%=request.getContextPath()%>/images/sorry.png" />
-					</button>
-					<button id="surrender">
+					</button>무르기
+					<button id="surrender" type="button">
 						<img src="<%=request.getContextPath()%>/images/surrender.png" />
-					</button>
+					</button>항복
 				</div>
 			</aside>
 			<div id="play_container">
@@ -313,18 +313,24 @@
 
 				</table>
 			</div>
-			<div class="game_chat">
-				<div class="my_chat">개못하네</div>
-				<div class="your_chat">어쩔티비</div>
+			<div id="chat_container">
+				<div class="game_chat">
+					<div class="my_chat">개못하네</div>
+					<div id="your_chat_container">
+						<img src="<%=request.getContextPath()%>/images/your_chat.png"
+							class="your_profile" />
+						<div class="your_chat">어쩔티비</div>
+					</div>
+				</div>
 				<div class="input_chat">
-					<input type="text"> <img
+					<input type="text" class="chat" name="chat"> <img
 						src="<%=request.getContextPath()%>/images/send_btn.png"
 						class="send_btn">
 				</div>
 			</div>
-
 		</div>
-		</div>
+			<%@ include file="lose.jsp"%>
+		
 	</main>
 	<%@ include file="../layout/footer.jsp"%>
 </body>

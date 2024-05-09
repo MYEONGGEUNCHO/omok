@@ -14,6 +14,10 @@ footer {
   padding: 10px 20px;
   background: #ffd7ce;
 }
+
+header {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
 footer {
   margin-top: 150px;
 }
@@ -57,18 +61,19 @@ main > * {
   border-radius: 3%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   height: 50%;
-  width: 50%;
+  width: 40%;
   padding: 5%;
   margin-top: 5%;
   position: absolute;
   z-index: -1;
 }
 
-.main_container .close_btn {
-  position: absolute;
-  width: 15px;
-  left: 95%;
-  top: 0.7%;
+.close_btn {
+  position: absolute !important;
+  width: 15px !important;
+  left: 95% !important;
+  top: 0.7% !important;
+  cursor: pointer !important;
 }
 
 /*버튼 기본값*/
