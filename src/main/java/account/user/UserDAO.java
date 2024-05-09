@@ -151,4 +151,28 @@ public class UserDAO {
 		
 		return result;
 	}
+	
+	public UserVO login(UserVO UserVO) {
+		UserVO vo = null;
+		String userId = UserVO.getUserId();
+		String pwd = UserVO.getPwd();
+		
+		try {
+			con = dataFactory.getConnection();
+			String query = "select * from users where userId = ? and pwd = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, pwd);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				vo = new UserVO();
+				vo.setUserId(rs.getString("userId"));
+				vo.setNickname(rs.getString("nickname"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
 }

@@ -10,6 +10,10 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="./css/common.css" />
   </head>
   <body>
+  <%
+	String userId = (String) session.getAttribute("userId");
+	String nickname = (String) session.getAttribute("nickname");
+  %>
   <%@ include file="layout/header.jsp" %>
     <main>
       <img src="logo" alt="main_logo" />

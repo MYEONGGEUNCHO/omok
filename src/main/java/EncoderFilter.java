@@ -31,7 +31,7 @@ public class EncoderFilter extends HttpFilter implements Filter {
 		// place your code here
 
 		// pass the request along the filter chain
-		System.out.println("필터");
+//		System.out.println("필터"); // 확인완료
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		chain.doFilter(request, response);
