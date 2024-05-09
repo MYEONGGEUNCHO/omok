@@ -9,6 +9,6 @@
 <body>
 	<h1>회원가입 환영합니다.</h1>
 	
-	<input type="button" value="돌아가기" onclick="location.href='/omok/user/loginForm'">
+	<input type="button" value="돌아가기" onclick="location.href='/omok/form/loginForm.jsp'">
 </body>
 </html>

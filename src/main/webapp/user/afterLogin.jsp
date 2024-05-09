@@ -15,7 +15,7 @@
 <body>
 	<div></div>
 	<h1><%=nickname %>님 안녕하세요</h1>
-	<button type="button" onclick="location.href='/omok/index.jsp'">전송하기</button> <br>
-	<button type="button" onclick="location.href='/omock/logout'">로그아웃</button>
+	<button type="button" onclick="location.href='/omok/index.jsp'">접속하기</button> <br>
+	<button type="button" onclick="location.href='/omok/logout'">로그아웃</button>
 </body>
 </html>
