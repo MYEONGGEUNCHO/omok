@@ -7,7 +7,7 @@
 	<%-- ajax로 회원가입, 비밀번호 찾기 폼 가져오기 --%>
 	<div id="user_info">
 		<a type="button"
-			href="<%=request.getContextPath()%>/form/registerForm.jsp">회원가입</a> <a
+			href="<%=request.getContextPath()%>/login/registerForm.jsp">회원가입</a> <a
 			type="button" href="<%=request.getContextPath()%>/find.jsp">비밀번호
 			찾기</a>
 	</div>
