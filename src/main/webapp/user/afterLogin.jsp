@@ -13,9 +13,16 @@
 	String nickname = (String) session.getAttribute("nickname");
 %>
 <body>
-	<div></div>
-	<h1><%=nickname %>님 안녕하세요</h1>
-	<button type="button" onclick="location.href='/omok/index.jsp'">접속하기</button> <br>
-	<button type="button" onclick="location.href='/omok/logout'">로그아웃</button>
+	<c:if test="${!empty loginSession }">
+		<div>
+			<h1><%=nickname %>님 안녕하세요</h1>
+			<button type="button" onclick="location.href='/omok/index.jsp'">접속하기</button> <br>
+			<button type="button" onclick="location.href='/omok/logout'">로그아웃</button>
+		</div>
+	</c:if>
+	<c:if test="${empty loginSession }">
+		미로그인 꺼져!!!<br>
+		<button type="button" onclick="location.href='/omok/index.jsp'">돌아가기</button> <br>
+	</c:if><br>
 </body>
 </html>

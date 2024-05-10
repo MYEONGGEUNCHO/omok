@@ -151,6 +151,12 @@ public class UserDAO {
 		
 		return result;
 	}
+	/**
+	 * 로그인 기능
+	 * 
+	 * @param UserVO : userId와 pwd를 담은 객체
+	 * @return UserVO : userID와 nickname을 담은 객체 리턴
+	 */
 	
 	public UserVO login(UserVO UserVO) {
 		UserVO vo = null;
@@ -174,5 +180,70 @@ public class UserDAO {
 		}
 		
 		return vo;
+	}
+	
+	/**
+	 * Users 테이블 회원 삭제 기능
+	 * 
+	 * @param userId: userId
+	 */
+	
+	public void deleteUser(String userId) {
+		try {
+			String query = "delete from users where userId = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		} finally {
+			// 커밋 로직
+			try {
+			con = dataFactory.getConnection();
+			String query = "commit";
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();
+			} catch (Exception e) {}
+			try {pstmt.close();}catch(Exception e) {}
+			try {con.close();}catch(Exception e) {}
+		}
+	}
+	
+	public void updateUser(String userId, String pwd, String nickname) {
+		try {
+			
+			if (pwd == "" && nickname == "") {
+				String query = "update users set pwd = ?, nickname = ?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, pwd);
+				pstmt.setString(2, nickname);
+				pstmt.executeUpdate();
+			} else if (pwd == "") {
+				String query = "update users set pwd = ?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, pwd);
+				pstmt.executeUpdate();
+			} else if (nickname == "") {
+				String query = "update users set nickname = ?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, nickname);
+				pstmt.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		} finally {
+			// 커밋 로직
+			try {
+			con = dataFactory.getConnection();
+			String query = "commit";
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();
+			} catch (Exception e) {}
+			try {pstmt.close();}catch(Exception e) {}
+			try {con.close();}catch(Exception e) {}
+		}
 	}
 }
