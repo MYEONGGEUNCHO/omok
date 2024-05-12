@@ -51,13 +51,19 @@ public class CreateUserServlet extends HttpServlet {
 		String command = request.getParameter("command");
 		UserDAO dao = new UserDAO();
 //		System.out.println(request.getParameter("userId"));
-		if ("addUser".equals(command)) {
+		String id = request.getParameter("userId");
+		String pwd = request.getParameter("pwd");
+		String nickname = request.getParameter("nickname");
+		String profile = request.getParameter("profile");
+		
+		if (id != null && pwd != null && nickname != null) {
 			UserVO vo = new UserVO();
-			vo.setUserId(request.getParameter("userId"));
-			vo.setPwd(request.getParameter("pwd"));
-			vo.setNickname(request.getParameter("nickname"));
-			vo.setProfile(request.getParameter("profile"));
+			vo.setUserId(id);
+			vo.setPwd(pwd);
+			vo.setNickname(nickname);
+			vo.setProfile(profile);
 			dao.addUser(vo);
+			System.out.println(vo.getUserId());
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/user/welcome.jsp");
