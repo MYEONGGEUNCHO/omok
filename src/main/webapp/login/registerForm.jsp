@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<form id="register_form" action="register.do" method="post">
-  <input type="text" name="id" placeholder="아이디" />
-  <input type="button" name="id_check" value="중복 아이디 확인" />
-  <input type="password" name="password" placeholder="비밀번호" />
-  <input type="password" name="password_confirm" placeholder="비밀번호 확인" />
+<form id="register_form" action="/omok/createUser" method="post">
+  <input type="text" name="userId" placeholder="아이디" />
+  <%-- 중복 아이디 체크 JS로 처리 --%>
+  <input type="button"  name="id_check" value="중복 아이디 확인" />
+  <input type="password" name="pwd" placeholder="비밀번호" />
+  <input type="password" name="pwd_confirm" placeholder="비밀번호 확인" />
   <input type="text" name="nickname" placeholder="닉네임" />
 
-  <select name="character">
+  <select name="profile">
     <option value="1">캐릭터1</option>
     <option value="2">캐릭터2</option>
     <option value="3">캐릭터3</option>

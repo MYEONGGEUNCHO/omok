@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('아이디 비밀번호가 올바르지 않습니다.');");
-			out.println("location.href='/omok/form/loginForm.jsp';");
+			out.println("location.href='/omok/index.jsp';");
 			out.println("</script>");
 			
 		} else {

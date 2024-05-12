@@ -1,10 +1,10 @@
-/*헤더, 푸터*/
 * {
   font-family: "Noto Sans", "나눔 고딕";
   font-weight: 400;
   font-style: normal;
   color: #7c7e7f;
 }
+/*헤더, 푸터*/
 
 header,
 footer {
@@ -74,6 +74,7 @@ main > * {
   left: 95% !important;
   top: 0.7% !important;
   cursor: pointer !important;
+  z-index: 1;
 }
 
 /*버튼 기본값*/
