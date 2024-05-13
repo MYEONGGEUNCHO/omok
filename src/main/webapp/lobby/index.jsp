@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <head>
-	<link href="lobby.css" />
+	<link rel="stylesheet" href="/omok/lobby/lobby.css" />
 	<%@ include file="../layout/header.jsp"%>
 </head>
 <body>
