@@ -9,4 +9,5 @@
 		<img class="close_btn"
 			src="<%=request.getContextPath()%>/images/close_btn.png" />
 	</div>
+	<div id="main_contents"></div>
 </div>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <head>
-	<link href="<%=request.getContextPath()%>/lobby/lobby.css" />
+	<link href="lobby.css" />
 	<%@ include file="../layout/header.jsp"%>
 </head>
 <body>
