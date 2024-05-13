@@ -1,184 +1,294 @@
 * {
-  font-family: "Noto Sans", "나눔 고딕";
-  font-weight: 400;
-  font-style: normal;
-  color: #7c7e7f;
+	font-family: "Noto Sans", "나눔 고딕" !important;
+	font-weight: 400;
+	font-style: normal;
+	color: #7c7e7f;
 }
 /*헤더, 푸터*/
-
-header,
-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: #ffd7ce;
+header, footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+	background: #ffd7ce;
 }
 
 header {
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
+/* 헤더 슬라이드 설정 */
+.head_bot .depth1 {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.head_bot {
+	width: 100%;
+	box-sizing: border-box;
+	border-top: 1px solid #dadada;
+	border-bottom: 1px solid #dadada;
+}
+
+.head_bot .gnb {
+	width: 100%;
+	position: relative;
+}
+
+.head_bot .depth1>li {
+	float: left;
+	width: 12.5%;
+	position: relative;
+}
+
+.head_bot .depth1>li>a {
+	display: block;
+	height: 30px;
+	line-height: 28px;
+	text-align: center;
+	font-size: 18px;
+	box-sizing: border-box;
+	border-right: 1px solid #dadada;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	font-weight: 500;
+}
+
+_:-ms-input-placeholder, :root .head_bot .depth1>li>a {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.head_bot .depth1>li:first-child>a {
+	border-left: 1px solid #dadada;
+}
+
+.head_bot .depth1>li>a.on, .head_bot .depth1>li>a:hover, .head_bot .depth1>li>a.active
+	{
+	background: white;
+}
+
+.head_bot .depth2 {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+	background: #ffd7cf;
+	padding-bottom: 10px;
+	z-index: 10;
+}
+
+.head_bot .depth2>li>a {
+	display: block;
+	text-align: center;
+	height: 32px;
+	line-height: 38px;
+	font-size: 16px;
+	transition: all .2s;
+	-webkit-transition: all .2s;
+	letter-spacing: -.5px;
+}
+
+_:-ms-input-placeholder, :root .head_bot .depth2>li>a {
+	font-size: 15px;
+	letter-spacing: -.5px;
+}
+
+.head_bot .depth2>li>a:hover, .head_bot .depth2>li>a.active {
+	background: white;
+	font-weight: 500;
+}
+
 footer {
-  margin-top: 150px;
+	margin-top: 150px;
 }
 /*메인*/
 main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	flex-direction: column;
 }
 
-main > * {
-  margin: 2rem;
+main>* {
+	margin: 2rem;
 }
 /*에러 페이지*/
 .error-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font: 40px;
 }
+
 .title {
-  position: absolute;
-  top: 10%;
-  font-size: 40px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
+	position: absolute;
+	top: 10%;
+	font-size: 40px;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
 }
-.title > img {
-  width: 100px;
-  margin-right: 10px;
+
+.title>img {
+	width: 100px;
+	margin-right: 10px;
 }
 
 /*기본 핑크 배경에 상단 탑 바, 버튼 모양*/
 .main_container {
-  background-image: linear-gradient(to bottom, #ffffff 25px, #ffd7ce 25px);
-  border: 1px solid #ccaca6;
-  border-radius: 3%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  height: 50%;
-  width: 40%;
-  padding: 5%;
-  margin-top: 5%;
-  position: absolute;
-  z-index: -1;
+	background-image: linear-gradient(to bottom, #ffffff 25px, #ffd7ce 25px);
+	border: 1px solid #ccaca6;
+	border-radius: 3%;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	height: 50%;
+	width: 40%;
+	padding: 5%;
+	margin-top: 5%;
+	position: absolute;
+	z-index: -1;
 }
 
 .close_btn {
-  position: absolute !important;
-  width: 15px !important;
-  left: 95% !important;
-  top: 0.7% !important;
-  cursor: pointer !important;
-  z-index: 1;
+	position: absolute !important;
+	width: 15px !important;
+	left: 95% !important;
+	top: 0.7% !important;
+	cursor: pointer !important;
+	z-index: 1;
 }
 
 /*버튼 기본값*/
-input[type="submit"],
-input[type="button"],
-button {
-  box-sizing: border-box;
-  background: #f9fcff;
-  border: 1px solid #7c7e7f;
-  border-radius: 9px;
+input[type="submit"], input[type="button"], button {
+	box-sizing: border-box;
+	background: #f9fcff;
+	border: 1px solid #7c7e7f;
+	border-radius: 9px;
 }
 
-input[type="submit"]:hover,
-input[type="button"]:hover,
-button:hover {
-  background: #7c7e7f;
-  color: #f9fcff;
+input[type="submit"]:hover, input[type="button"]:hover, button:hover {
+	background: #7c7e7f;
+	color: #f9fcff;
+}
+
+input[type="submit"]:disabled, input[type="button"]:disabled, button:disabled
+	{
+	background: #7c7e7f;
+	color: #f9fcff;
 }
 /*폰트 사이즈*/
 .font_size1 {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 .font_size2 {
-  font-size: 24px;
+	font-size: 24px;
 }
 
 .font_size3 {
-  font-size: 32px;
+	font-size: 32px;
 }
+
 .font_size4 {
-  font-size: 48px;
+	font-size: 48px;
 }
 /*가운데 정렬*/
 .center {
-  text-align: center;
-  position: flex;
-  align-items: center;
-  justify-content: center;
+	text-align: center;
+	position: flex;
+	align-items: center;
+	justify-content: center;
 }
 /*입력칸 기본 테두리 지우기*/
 input {
-  border-width: 0;
+	border-width: 0;
 }
 /*라벨 기본 설정*/
 label {
-  font-size: 32px;
-  background-color: #ffd7ce;
-  text-align: center;
-  padding: 5%;
+	font-size: 32px;
+	background-color: #ffd7ce;
+	text-align: center;
+	padding: 5%;
 }
 /*a 태그 기본 설정*/
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 /*헤더 로고*/
 #mini_logo {
-  width: 60px;
+	width: 60px;
 }
 /***************************** 임시 저장*/
-
-#login_form,
-#register_form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 40%;
+#login_form, #frmMember {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 40%;
 }
 
-#login_form > *,
-#register_form > * {
-  margin-top: 3%;
-  width: 100%;
-  padding: 10px;
-  width: 100%;
+#login_form>*, #frmMember>* {
+	margin-top: 3%;
+	width: 100%;
+	padding: 10px;
+	width: 100%;
 }
 
-#login_form > #user_info {
-  display: flex;
-  justify-content: space-between;
-  width: 70%;
+#frmMember>input[type="button"] {
+	margin: 0;
 }
 
+#login_form>#user_info {
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
+}
+
+#password_check, #message {
+	color: #ccaca6;
+}
+
+#profile-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#profile_img_box {
+	margin-left: 15px;
+	width: 100px;
+	height: 100px;
+	background: rgba(249, 252, 255, 0.9);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#profile_img {
+	width: 70%;
+}
 /* 테스트 부분*/
 .circle {
-  width: 100px;
-  height: 100px;
-  background-color: lightblue;
-  border-radius: 50%; /* 원 모양 만들기 */
-  position: relative;
+	width: 100px;
+	height: 100px;
+	background-color: lightblue;
+	border-radius: 50%; /* 원 모양 만들기 */
+	position: relative;
 }
 
 .x-button {
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* 가운데 정렬 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%; /* 원 모양 만들기 */
-  cursor: pointer;
+	width: 20px;
+	height: 20px;
+	background-color: red;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); /* 가운데 정렬 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%; /* 원 모양 만들기 */
+	cursor: pointer;
 }
