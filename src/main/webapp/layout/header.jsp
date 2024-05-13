@@ -4,10 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>신한DS 오목</title>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/reset.css" />
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/common.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common.css?ver=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link

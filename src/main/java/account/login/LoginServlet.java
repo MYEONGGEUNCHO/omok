@@ -33,7 +33,6 @@ public class LoginServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('아이디 비밀번호가 올바르지 않습니다.');");
-			out.println("location.href='/omok/form/loginForm.jsp';");
 			out.println("</script>");
 			
 		} else {
@@ -44,9 +43,9 @@ public class LoginServlet extends HttpServlet {
 			
 			request.setAttribute("userId", loginVO.getUserId());
 			request.setAttribute("nickname", loginVO.getNickname());
-			response.sendRedirect("/omok/user/afterLogin.jsp");
 //			request.getRequestDispatcher("/omok/user/afterLogin.jsp").forward(request, response);
 		}
+		response.sendRedirect("/omok/index.jsp");
 	}
 
 }
