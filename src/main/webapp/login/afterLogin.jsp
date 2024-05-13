@@ -14,7 +14,7 @@
 				님 안녕하세요.
 			</div>
 			<button>게임 시작</button>
-			<button type="button">로그아웃</button>
+			<button type="button" >로그아웃</button>
 		</div>
 	</main>
 	<%@ include file="../layout/footer.jsp"%>

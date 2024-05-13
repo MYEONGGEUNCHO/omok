@@ -4,8 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>신한DS 오목</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/reset.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/common.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -13,6 +15,7 @@
 	rel="stylesheet" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 <header>
 	<a href="<%=request.getContextPath()%>/index.jsp"> <img
@@ -30,7 +33,7 @@
 					<li><a href="">마이페이지</a></li>
 				</ul>
 			</td>
-			<td>로그아웃</td>
+			<td><a href="/omok/logout">로그아웃</a></td>
 		</tr>
 	</table>
 </header>

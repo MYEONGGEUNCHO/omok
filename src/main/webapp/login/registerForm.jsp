@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<form id="register_form" action="register.do" method="post">
+<form id="register_form" action="/omok/createUser" method="post">
   <input type="text" name="id" placeholder="아이디" />
   <input type="button" name="id_check" value="중복 아이디 확인" />
   <input type="password" name="password" placeholder="비밀번호" />
