@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <header>
-  <img src="mini_logo" alt="mini_logo" />
+  <img src="/omok/images/mini_logo.png" alt="mini_logo" />
   <table>
     <tr>
       <td>
