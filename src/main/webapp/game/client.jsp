@@ -170,7 +170,7 @@
     /*		서버 소켓 통신 관련 함수		*/
     
     // 웹 소켓 객체 생성
-    let ws = new WebSocket("ws://localhost:8090/test/server");
+    let ws = new WebSocket("ws://localhost:8090/omok/server");   
     console.log("객체 생성");
     var inputMessage = document.getElementById('inputMessage');
     var textarea = document.getElementById("messageWindow");
