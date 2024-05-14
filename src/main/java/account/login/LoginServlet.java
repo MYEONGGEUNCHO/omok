@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("loginSession", loginVO);
 			session.setAttribute("userId", loginVO.getUserId());
 			session.setAttribute("nickname", loginVO.getNickname());
+			session.setAttribute("profile", loginVO.getProfile());
 			
 			request.setAttribute("userId", loginVO.getUserId());
 			request.setAttribute("nickname", loginVO.getNickname());
