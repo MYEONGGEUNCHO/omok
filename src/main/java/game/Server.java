@@ -15,25 +15,24 @@ import org.json.JSONObject;
 
 @ServerEndpoint("/server")
 public class Server {
+	// 연결된 clients 저장
     private static Set<Session> clients = Collections.synchronizedSet(new HashSet<>());
+    // 서버 접솔되었을 때 board 객체 1번 생성
     private static Board board = new Board();
+    
     @OnOpen
     public void onOpen(Session session) {
     	if (clients.size() < 2) {
             clients.add(session);
             System.out.println("Client connected: " + session.getId());
             System.out.println("client size : " + clients.size());
-        } else if(clients.size() == 2) {
-        	System.out.println("Client connected: " + session.getId());
-        	System.out.println("client size : " + clients.size());
         } else {
         	System.out.println("---------------");
             System.out.println("Maximum clients reached. Cannot accept new connections.");
-            System.out.println("Client connected: " + session.getId());
-            System.out.println("client size : " + clients.size());
         }
     }
 
+    // client 에게 받은 메세지 처리
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
     	System.out.println("Received from client " + session.getId() + ": " + message);
@@ -64,15 +63,12 @@ public class Server {
     	JSONObject returnObject = new JSONObject();
     	returnObject.put("x", x);
     	returnObject.put("y", y);
-    	System.out.println("확인영" + currentPlayer);
-    	System.out.println("-----------");
     	returnObject.put("currentPlayer", currentPlayer);
     	returnObject.put("state", state);
     	returnObject.put("myTurn", myTurn);
     	String jsonInfo = returnObject.toString();
     	
     	for (Session client : clients) {
-    		//client.getBasicRemote().sendText("Opossite move data - X: " + x + ", Y: " + y + ", Stone: " + currentPlayer);
     		client.getBasicRemote().sendText(jsonInfo);
     	}
     }

@@ -67,8 +67,6 @@
         ctx.arc(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize / 2 - 2, 0, 2 * Math.PI);
         ctx.fillStyle = stoneColor;
         ctx.fill();
-        //lastStoneX = x;
-        //lastStoneY = y;
     }
 	
 	
@@ -89,17 +87,17 @@
     
     
     
-    
+    // 웹 소켓 객체 생성
     let ws = new WebSocket("ws://localhost:8090/omok/server");
-    
+    // 서버와 연결된 경우 실행
     ws.onopen = function() {
         console.log("client> connected to server")
-        //console.log("내 세션 id : " + ws.id);
     };
     
+    //서버로부터 메세지 받은 경우 실행 
     ws.onmessage = function(event) {
     	let receivedData = JSON.parse(event.data);
-    	// 예시: 받은 데이터의 x, y, stone 값을 사용하여 처리
+    	// 받은 데이터의 x, y, stone 값을 사용하여 처리
         x = receivedData.x;
         y = receivedData.y;
         currentPlayer = receivedData.currentPlayer;
@@ -109,8 +107,6 @@
         if(myTurn) {
 	        currentPlayer = recieveMessage(x, y, currentPlayer, state);
         }
-        console.log("onmessage의 player : " + currentPlayer + " x, y : " + x + " "+ y + " state : " + state);
-        console.log("------------------");
         
     };
 	
@@ -132,11 +128,10 @@
 			drawStone(x, y, currentPlayer);
 			currentPlayer = (currentPlayer == 1) ? 2 : 1;
 			finish = false;
-			console.log("현재 플레이어 변경 : " + currentPlayer);
 			return currentPlayer;
 		} else if(state == "badPosition") {
 			finish = false;
-			alert(currentPlayer + "님이 badPosition. 착수 불가 위치에 착수를 시도했습니다.");
+			alert(currentPlayer + "님이 착수 불가 위치에 착수를 시도했습니다.");
 			return currentPlayer;
 		} else if(state == "white") {
 			finish = true;
