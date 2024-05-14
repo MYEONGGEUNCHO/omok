@@ -162,6 +162,7 @@ public class UserDAO {
 		UserVO vo = null;
 		String userId = UserVO.getUserId();
 		String pwd = UserVO.getPwd();
+		System.out.println("UserDAO login() 로그인 요청 아이디 : " + UserVO.getUserId());
 		
 		try {
 			con = dataFactory.getConnection();

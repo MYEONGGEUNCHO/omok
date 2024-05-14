@@ -1,0 +1,30 @@
+.lobby_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	height: 50%;
+	width: 50%;
+}
+
+.lobby_list {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 1em;
+}
+
+.lobby_list td {
+	background-color: #F9FCFF;
+	text-align: center;
+	margin: 10px;
+}
+
+.lobby_list a {
+	font-size: 1.5em;
+	line-height: 2em;
+}
+
+.lobby_list a:hover {
+	text-decoration: none;
+	color: rgb(204, 145, 145);
+}

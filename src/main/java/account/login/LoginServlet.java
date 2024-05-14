@@ -13,10 +13,12 @@ import javax.servlet.http.HttpSession;
 import account.user.UserDAO;
 import account.user.UserVO;
 
+/**
+ * Servlet implementation class LoginServlet
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userId = request.getParameter("userId");
@@ -25,15 +27,15 @@ public class LoginServlet extends HttpServlet {
 		UserVO vo = new UserVO();
 		vo.setUserId(userId);
 		vo.setPwd(pwd);
-		
 		HttpSession session = request.getSession();
 		UserDAO dao = new UserDAO();
 		UserVO loginVO = dao.login(vo);
+		response.setContentType("text/html; charset=utf-8");
 		if (loginVO == null) {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('아이디 비밀번호가 올바르지 않습니다.');");
-			out.println("location.href='/omok/form/loginForm.jsp';");
+			out.println("history.back();"); // 이전 페이지로 돌아가는 JavaScript 코드
 			out.println("</script>");
 			
 		} else {
@@ -44,9 +46,11 @@ public class LoginServlet extends HttpServlet {
 			
 			request.setAttribute("userId", loginVO.getUserId());
 			request.setAttribute("nickname", loginVO.getNickname());
-			response.sendRedirect("/omok/user/afterLogin.jsp");
-//			request.getRequestDispatcher("/omok/user/afterLogin.jsp").forward(request, response);
+//			response.sendRedirect("/omok/index.jsp");
+			PrintWriter out = response.getWriter();
+			out.println("<script>location.href='/omok/index.jsp'</script>");
 		}
 	}
+
 
 }
