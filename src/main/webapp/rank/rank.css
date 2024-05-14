@@ -1,0 +1,40 @@
+.rank-container {
+	display: flex;
+	width: 50%;
+	height: 50%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.rank-container>* {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	width: 80%;
+	height: 2.5em;
+}
+
+
+.r, .n {
+	width: 25%;
+}
+.wl {
+	width: 40%;
+}
+.tag {
+	height: 1.5em;
+	
+}
+.rank-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	text-align: center;
+	font-size: 1.1em;
+}
+.rank-item {
+	background: #F9FCFF;
+}

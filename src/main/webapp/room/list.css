@@ -5,6 +5,12 @@
 	justify-content: center;
 	align-content: center;
 	align-items: center;
+	overflow-y: scroll;
+}
+
+.main-content::-webkit-scrollbar {
+	background: #ffd7ce;
+	width: 0px;
 }
 
 .button-container, .room-list {
@@ -43,11 +49,11 @@
 }
 
 .enter-room {
-    padding: 2% 5%;
-    background-color: #FFD7CF;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
+	padding: 2% 5%;
+	background-color: #FFD7CF;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
 }
 
 .enter-room:hover {

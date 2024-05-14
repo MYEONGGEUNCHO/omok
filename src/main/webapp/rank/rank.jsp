@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
 <%@ page import="rank.RankVO"%>
 <%@ page import="rank.RankDAO"%>
 <%@ page import="java.util.List"%>
@@ -19,100 +17,47 @@ String userId = (String) session.getAttribute("userId");
 RankVO myRank = dao.myrank(userId);
 %>
 <head>
-<meta charset="UTF-8">
-<title>랭크 페이지</title>
+<%@ include file="../layout/header.jsp"%>
+<link rel="stylesheet" href="rank.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
+	<main>
+		<%@ include file="../layout/mainContainer.jsp"%>
 
-	<%@ include file="../layout/header.jsp"%>
-	<div class="rank-block">
-		<h1>전체 순위</h1>
-		<div class="tag">
-			<span class="r">순위</span><span class="n">닉네임</span><span class="wl">전적</span>
+		<div class="rank-container">
+			<div class="rank-title">전체 순위</div>
+			<div class="tag">
+				<span class="r">순위</span><span class="n">닉네임</span><span class="wl">전적</span>
+			</div>
+			<%
+			int rankidx = 1;
+			// 				System.out.println(rankList);
+			for (RankVO rank : rankList) {
+			%>
+			<div class="rank-item">
+				<span class="r"><%=rankidx%>위</span><span class="n"><%=rank.getNickname()%></span>
+				<span class="wl">win: <%=rank.getWin()%> / lose: <%=rank.getLose()%></span>
+			</div>
+			<%
+			rankidx++;
+			if (rankidx > 3)
+				break;
+			}
+			%>
+			<div class="rank-title">내 순위</div>
+			<div class="rank-item">
+				<c:if test="${myRank == null}">
+					<div>로그인 후 확인하세요.</div>
+				</c:if>
+				<c:if test="${myRank != null}">
+					<span class="r"><%=myRank.getIdx()%>위</span>
+					<span class="n"><%=myRank.getNickname()%></span>
+					<span class="wl">win: <%=myRank.getWin()%> / lose: <%=myRank.getLose()%></span>
+				</c:if>
+			</div>
 		</div>
-		<%
-		int rankidx = 1;
-		for (RankVO rank : rankList) {
-		%>
-		<div class="rank-item">
-			<span class="r"><%=rankidx%>위</span><span class="n"><%=rank.getNickname()%></span>
-			<span class="wl">win: <%=rank.getWin()%> / lose: <%=rank.getLose()%></span>
-		</div>
-		<%
-		rankidx++;
-		}
-		%>
-		<h1>내 순위</h1>
-		<div class="rank-item">
-			<span class="r"><%=myRank.getIdx()%>위</span><span class="n"><%=myRank.getNickname()%></span>
-			<span class="wl">win: <%=myRank.getWin()%> / lose: <%=myRank.getLose()%></span>
-		</div>
-	</div>
-
-
-
-	<%@ include file="../layout/footer.jsp"%>
+	</main>
 </body>
-<style>
-h1 {
-	text-align: center;
-}
-
-.tag {
-	margin: 0 auto;
-	margin-bottom: 10px;
-	width: 800px;
-	height: auto;
-	background-color: none;
-	width: 800px;
-	display: felx;
-}
-
-.tag>span {
-	font-size: 30px;
-}
-
-.r {
-	float: left;
-	margin-left: 20px;
-}
-
-.n {
-	margin-left: 100px;
-}
-
-.wl {
-	float: right;
-}
-
-.rank-block {
-	padding: 10px;
-	width: 1200px;
-	height: 700px;
-	background-color: #FFD7CE;
-	margin: 0 auto;
-}
-
-.rank-item {
-	margin: 0 auto;
-	margin-bottom: 20px;
-	width: 800px;
-	height: 90px;
-	background-color: white;
-	width: 800px;
-	display: flex;
-	align-items: center;
-}
-.rank-item .wl {
-    margin-left: auto;
-    margin-right: 10px;
-}
-
-
-.rank-item>span {
-	font-size: 30px;
-}
-</style>
-</html>
+<%@ include file="../layout/footer.jsp"%>

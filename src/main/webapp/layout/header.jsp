@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,8 +27,16 @@
 			$(this).find("ul").slideUp();
 		});
 	});
+	$(document)
+			.ready(
+					function() {
+<%String userId = (String) session.getAttribute("userId");
+String nickname = (String) session.getAttribute("nickname");
+System.out.println(session.getAttribute("nickname") + "님이 로그인했습니다.");%>
+	})
 </script>
 </head>
+
 <header>
 	<a href="<%=request.getContextPath()%>/index.jsp"> <img
 		src="<%=request.getContextPath()%>/images/logo.png" id="mini_logo"
@@ -40,14 +49,18 @@
 					<!-- 로그인 상태에서만 게임, 마이페이지 접근 -->
 					<li><a href="">메인메뉴</a>
 						<ul class="depth2">
-							<li><a href="">게임</a></li>
-							<li><a href="">랭킹</a></li>
-							<li><a href="">마이페이지</a></li>
+							<li><a href="/omok/game/index.jsp">게임</a></li>
+							<li><a href="/omok/rank/rank.jsp">랭킹</a></li>
+							<li><a href="/omok/user/mypage.jsp">마이페이지</a></li>
 						</ul></li>
-					<li><a href=""><%=session.getAttribute("nickname")%>님 </a>
-						<ul class="depth2">
-							<li><a href="/omok/logout">로그아웃</a></li>
-						</ul></li>
+					<li><c:if test="${!empty nickname}">
+							<a href=""><%=nickname%>님 </a>
+							<ul class="depth2">
+								<li><a href="/omok/logout">로그아웃</a></li>
+							</ul>
+						</c:if> <c:if test="${empty nickname}">
+							<a href="/omok/index.jsp">로그인</a>
+						</c:if></li>
 				</ul>
 			</div>
 		</div>
