@@ -69,8 +69,6 @@
             $("#inputMessage").val(""); //메시지 초기화
             scrollToBottom();  //하단으로 이동
         }
-    	
-
     }
     //enter치면 send
     function enterkey() {
@@ -94,7 +92,7 @@
                 $("#_chatbox").css("display", "block");
                 chatVisible = true;
             }
-            }
+           }
         });
     });
 
