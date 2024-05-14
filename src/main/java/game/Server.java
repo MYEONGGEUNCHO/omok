@@ -36,10 +36,27 @@ public class Server {
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
     	System.out.println("Received from client " + session.getId() + ": " + message);
-    	JSONObject turn = new JSONObject(message);
-    	int x = (int) turn.get("x");
-    	int y = (int) turn.get("y");
-    	int currentPlayer = (int) turn.get("currentPlayer");
+    	
+    	JSONObject jsonMessage = new JSONObject(message);
+    	String type = jsonMessage.getString("type");
+    	System.out.println("server type : " + type);
+    	switch (type) {
+	        case "chat":
+	            handleChatMessage(jsonMessage, session);
+	            break;
+	        case "gomok":
+	            handleOmokMessage(jsonMessage, session);
+	            break;
+	        default:
+	            System.out.println("Unknown message type: " + type);
+    	}
+    }
+
+    private void handleOmokMessage(JSONObject jsonMessage, Session session) throws IOException {
+    	int x = (int) jsonMessage.get("x");
+    	int y = (int) jsonMessage.get("y");
+    	int currentPlayer = (int) jsonMessage.get("currentPlayer");
+    	String type = jsonMessage.getString("type");
     	System.out.println("Received move data - X: " + x + ", Y: " + y + ", Stone: " + currentPlayer);
     	
     	// Board 객체 사용해서 룰 체크 -> 상태(돌 놓는 규칙 위배 여부, 승패 확인) 종류 별로 다르게 클라이언트로 전달
@@ -61,6 +78,7 @@ public class Server {
     	board.printBoard();
     	// x, y, currentPlayer, state 
     	JSONObject returnObject = new JSONObject();
+    	returnObject.put("type", type);
     	returnObject.put("x", x);
     	returnObject.put("y", y);
     	returnObject.put("currentPlayer", currentPlayer);
@@ -71,12 +89,34 @@ public class Server {
     	for (Session client : clients) {
     		client.getBasicRemote().sendText(jsonInfo);
     	}
-    }
+	}
 
-    @OnClose
+	private void handleChatMessage(JSONObject jsonMessage, Session session) throws IOException {
+		String type = jsonMessage.getString("type");
+		String message = jsonMessage.getString("chatMessage");
+		System.out.println("메시지 전송: " + session.getId() + ": " + message);
+		JSONObject returnObject = new JSONObject();
+    	returnObject.put("type", type);
+    	returnObject.put("message", message);
+    	String jsonInfo = returnObject.toString();
+		synchronized (clients) {
+			for(Session client : clients) {  
+				if(!client.equals(session)) {
+					client.getBasicRemote().sendText(jsonInfo);
+				}
+			}
+		}
+	}
+
+	@OnClose
     public void onClose(Session session) {
         clients.remove(session);
         System.out.println("Client disconnected: " + session.getId());
     }
+    
+    public void onError(Throwable e) {
+		System.out.println("에러 발생");
+		e.printStackTrace();
+	}
 
 }
