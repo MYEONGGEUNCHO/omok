@@ -17,6 +17,7 @@ public class Board {
         }
     }
     
+    // 콘솔 출력 확인용
     public void printBoard() {
     	System.out.println();
     	
