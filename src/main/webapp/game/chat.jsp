@@ -8,72 +8,98 @@
 String nickname = (String) session.getAttribute("nickname");
 %>
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-	// 웹 소켓은 http가 아닌 ws 프로토콜을 사용
-	var websocket = new WebSocket('ws://localhost:9000/omok/websocket');
-	
-	// 메세지를 받았을 때 실행
-	websocket.onmessage = function(event) {
-		var message = event.data.split("|"); // 대화명과 메시지 분리
-		var sender = message[0];
-		var content = message[1];
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
 
-		if (content !== "") {
-			$("#messageWindow").append(
-					"<div class='message'><img src='../images/profile.png' class='profile_ic'>"
-							+ "<span class='sender'>" + sender + "</span>"
-							+ "<p class='chat_content1'>" + content
-							+ "</p></div>");
-			scrollToBottom();
-		} else {
-			$("#messageWindow").append(
-					"<div class='message'><span class='system'>" + sender
-							+ "님이 종료하였습니다.</span></div>");
-			scrollToBottom();
-		}
-	};
-	// 웹소켓 서버에 연결되었을 때 실행
-	websocket.onopen = function() {
+	//파라미터로 닉네임, 방 정보 가져오기
+
+	//웹 소켓은 http가 아닌 ws 프로토콜을 사용
+    var websocket = new WebSocket('ws://localhost:8090/omok/websocket');
+    var inputMessage = document.getElementById('inputMessage');
+    var textarea = document.getElementById("messageWindow");
+    var nickname = "<%= nickname %>"; 
+    
+    websocket.onmessage = onMessage;
+    websocket.onopen = onOpen;
+    websocket.onclose = onClose;
+
+    //웹소켓 서버에 연결되었을 때 실행
+    function onOpen(event) {
 		$("#messageWindow").html("<p class='notice'>채팅에 참여하였습니다.</p>");
+	}
 
-	};
-	
-	// 웹소켓이 닫혔을 때 실행
-	websocket.onclose = function() {
-		console.log(event);
+    //웹소켓이 닫혔을 때 실행
+	function onClose(event) {
 		$("#messageWindow").html("<p class='notice'>채팅이 종료되었습니다.</p>");
-
-	};
-	//웹소켓 에러 발생 시 실행
-	websocket.onerror = function(event) {
-		console.log(event);
 	}
 
-	function send() {
-		var message = $("#inputMessage").val().trim();
-		if (message !== "") {
-			$("#messageWindow").append(
-					"<div class='message'><span class='self'>" + message
-							+ "</span></div>");
-			websocket.send(message); // 서버로 전송
-			$("#inputMessage").val(""); // 메시지 초기화
-			scrollToBottom(); // 하단으로 이동
-		}
-	}
+    //메세지 받았을 때 실행
+    function onMessage(event) {
+    	//console.log(event.data);
+        var message = event.data.split("|");  //대화명과 메시지 분리
+        var sender = message[0];
+		var content = message[1];
+		//console.log(sender);
+		//console.log(content);
+		
+        if(content !=""){
+        	$("#messageWindow").html($("#messageWindow").html() + "<img src='../images/profile.png' class='profile_ic'>" + sender
+        			+ "<p class='chat_content1'>"+ content + "</p>");
+            scrollToBottom();
+        } 
+        else {
+            $("#messageWindow").html($("#messageWindow").html() + "<p class='chat_content'>" + sender + "님이 종료하였습니다.</p>");
+        }
+    }
 
-	// 엔터키 눌렀을 때 send 함수 호출
-	function enterkey(event) {
-		if (event.keyCode === 13) {
-			send();
-		}
-	}
+	
+    function send(){
+    	//var Message = $("#inputMessage").val();
+    	//console.log($("#inputMessage").val());
+        if($("#inputMessage").val() == ""){
 
-	function scrollToBottom() { // 하단으로 이동
-		var elem = document.getElementById('messageWindow');
-		elem.scrollTop = elem.scrollHeight;
-	}
+        }else{
+            $("#messageWindow").html($("#messageWindow").html()
+                + "<p class = 'chat_content2'>" + $("#inputMessage").val() + "</p>");
+            websocket.send($("#chat_id").val() + "|" + $("#inputMessage").val());  //서버로 전송
+            $("#inputMessage").val(""); //메시지 초기화
+            scrollToBottom();  //하단으로 이동
+        }
+    }
+    //enter치면 send
+    function enterkey() {
+        if (window.event.keyCode == 13) {
+            send(); 
+        }
+    }
+
+    $(document).ready(function() {
+        //websocket.init();
+        let chatVisible = true; // 채팅창의 표시 여부를 나타내는 변수
+
+    //아이콘 클릭시 채팅창 보이기 & 숨기기
+        $(".chat_icon").on({"click" : function() {
+            if(chatVisible){
+                $(".chat_icon").attr("src", "../images/chat_icon.png");
+                $("#_chatbox").css("display", "none");
+                chatVisible = false;
+            }else{
+                $(".chat_icon").attr("src", "../images/chat_icon.png");
+                $("#_chatbox").css("display", "block");
+                chatVisible = true;
+            }
+           }
+        });
+    });
+
+    function scrollToBottom() {  //하단으로 이동
+        var elem = document.getElementById('messageWindow');
+        elem.scrollTop = elem.scrollHeight;
+    }
 
 	$(document).ready(function() {
 		// 아이콘 클릭시 채팅창 보이기 & 숨기기
