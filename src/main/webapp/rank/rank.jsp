@@ -4,27 +4,22 @@
 <%@ page import="rank.RankDAO"%>
 <%@ page import="java.util.List"%>
 <%-- <% session.setAttribute("userId", "player4"); --%>
+
+<head>
+<%@ include file="/layout/header.jsp"%>
+<link rel="stylesheet" href="rank.css" />
+</head>
 <%
 RankDAO dao = new RankDAO();
-
 // 전체 순위 정보 가져오기
 List<RankVO> rankList = dao.rank();
-
-// 현재 사용자의 아이디 (세션 등에서 가져와야 함)
-String userId = (String) session.getAttribute("userId");
-
 // 현재 사용자의 순위 정보 가져오기
 RankVO myRank = dao.myrank(userId);
+System.out.println(userId);
 %>
-<head>
-<%@ include file="../layout/header.jsp"%>
-<link rel="stylesheet" href="rank.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
 <body>
 	<main>
-		<%@ include file="../layout/mainContainer.jsp"%>
+		<%@ include file="/layout/mainContainer.jsp"%>
 
 		<div class="rank-container">
 			<div class="rank-title">전체 순위</div>
@@ -60,4 +55,4 @@ RankVO myRank = dao.myrank(userId);
 		</div>
 	</main>
 </body>
-<%@ include file="../layout/footer.jsp"%>
+<%@ include file="/layout/footer.jsp"%>

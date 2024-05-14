@@ -219,7 +219,32 @@ a {
 #mini_logo {
 	width: 60px;
 }
-/***************************** 임시 저장*/
+
+.after-login {
+	display: flex;
+	align-items: center;
+	flex-direction: column; 
+	justify-content : space-between;
+	height: 30%;
+	justify-content: space-between;
+}
+
+.after-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.after-button button {
+	padding: 5% 30%;
+}
+
+.login-title {
+	font-size: 28px;
+}
+
 #login_form, #frmMember {
 	display: flex;
 	justify-content: center;
@@ -234,6 +259,7 @@ a {
 	padding: 10px;
 	width: 100%;
 }
+
 #frmMember input[type="text"], #frmMember input[type="password"] {
 	padding: 10px;
 	margin: 0;
@@ -243,15 +269,18 @@ a {
 #frmMember>input[type="button"] {
 	margin: 0;
 }
+
 #frmMember>.id_form {
 	display: flex;
 	justify-content: space-between;
-    align-items: center;
+	align-items: center;
 }
-.id_form > #userId {
+
+.id_form>#userId {
 	flex-basis: 60%;
 }
-.id_form > #id_check {
+
+.id_form>#id_check {
 	flex-basis: 30%;
 }
 

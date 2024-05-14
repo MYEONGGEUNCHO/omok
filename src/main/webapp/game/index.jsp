@@ -25,7 +25,7 @@
 </script>
 </head>
 <body>
-	<%@ include file="../layout/header.jsp"%>
+	<%@ include file="/layout/header.jsp"%>
 	<main>
 		<div id="game_container">
 			<aside class="player_side">

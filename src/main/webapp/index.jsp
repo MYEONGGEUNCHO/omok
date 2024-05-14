@@ -14,11 +14,16 @@
 			<%@ include file="/user/loginForm.jsp"%>
 		</c:if>
 		<c:if test="${!empty userId}">
-			<h1><%=nickname%>님 안녕하세요
-			</h1>
-			<button type="button" onclick="location.href='/omok/lobby/index.jsp'">접속하기</button>
-			<br>
-			<button type="button" onclick="location.href='/omok/logout'">로그아웃</button>
+			<div class="after-login">
+				<div class="login-title"><%=nickname%>님 안녕하세요
+				</div>
+				<div class="after-button">
+					<button type="button"
+						onclick="location.href='/omok/lobby/index.jsp'">접속하기</button>
+					<br>
+					<button type="button" onclick="location.href='/omok/logout'">로그아웃</button>
+				</div>
+			</div>
 		</c:if>
 
 	</main>
