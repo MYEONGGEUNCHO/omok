@@ -187,8 +187,7 @@ public class UserDAO {
 	 * Users 테이블 회원 삭제 기능
 	 * 
 	 * @param userId: userId
-	 */
-	
+	 */	
 	public void deleteUser(String userId) {
 		try {
 			String query = "delete from users where userId = ?";
@@ -211,21 +210,27 @@ public class UserDAO {
 		}
 	}
 	
+	/**
+	 * 마이페이지에서 회원정보를 받아 수정하는 기능
+	 * 
+	 * @param userId
+	 * @param pwd
+	 * @param nickname
+	 */
 	public void updateUser(String userId, String pwd, String nickname) {
-		try {
-			
-			if (pwd == "" && nickname == "") {
+		try {			
+			if (pwd != "" && nickname != "") {
 				String query = "update users set pwd = ?, nickname = ?";
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, pwd);
 				pstmt.setString(2, nickname);
 				pstmt.executeUpdate();
-			} else if (pwd == "") {
+			} else if (pwd != "") {
 				String query = "update users set pwd = ?";
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, pwd);
 				pstmt.executeUpdate();
-			} else if (nickname == "") {
+			} else if (nickname != "") {
 				String query = "update users set nickname = ?";
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, nickname);
