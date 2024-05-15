@@ -7,7 +7,7 @@
 	justify-content: space-around;
 }
 
-.rank-container>* {
+.rank-container>*, .total-rank>* {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -16,17 +16,31 @@
 	height: 2.5em;
 }
 
+.total-rank {
+	flex-direction: column;
+	overflow-y: scroll;
+	width: 100%;
+	height: 12em;
+	box-shadow: inset 1px 0px 8px rgba(0, 0, 0, 0.25);
+}
+
+.total-rank::-webkit-scrollbar {
+	background: #ffd7ce;
+	width: 0px;
+}
 
 .r, .n {
 	width: 25%;
 }
+
 .wl {
 	width: 40%;
 }
+
 .tag {
 	height: 1.5em;
-	
 }
+
 .rank-title {
 	display: flex;
 	align-items: center;
@@ -35,6 +49,9 @@
 	text-align: center;
 	font-size: 1.1em;
 }
+
 .rank-item {
 	background: #F9FCFF;
+	line-height: 40px;
+	margin: 12px 0 12px;
 }

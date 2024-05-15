@@ -15,7 +15,7 @@ RankDAO dao = new RankDAO();
 List<RankVO> rankList = dao.rank();
 // 현재 사용자의 순위 정보 가져오기
 RankVO myRank = dao.myrank(userId);
-System.out.println(userId);
+System.out.println("(rank.jsp)myRank.getNickname() : " + myRank.getNickname());
 %>
 <body>
 	<main>
@@ -26,30 +26,35 @@ System.out.println(userId);
 			<div class="tag">
 				<span class="r">순위</span><span class="n">닉네임</span><span class="wl">전적</span>
 			</div>
-			<%
-			int rankidx = 1;
-			// 				System.out.println(rankList);
-			for (RankVO rank : rankList) {
-			%>
-			<div class="rank-item">
-				<span class="r"><%=rankidx%>위</span><span class="n"><%=rank.getNickname()%></span>
-				<span class="wl">win: <%=rank.getWin()%> / lose: <%=rank.getLose()%></span>
+			<div class="total-rank">
+
+				<%
+				// 			int rankidx = 1;
+				// 				System.out.println(rankList);
+				for (RankVO rank : rankList) {
+				%>
+				<div class="rank-item">
+					<span class="r"><%=rank.getIdx()%>위</span><span class="n"><%=rank.getNickname()%></span>
+					<span class="wl"><%=rank.getWin()%>승 / <%=rank.getLose()%>패</span>
+				</div>
+				<%
+				// 			rankidx++;
+				// 			if (rankidx > 3)
+				// 				break;
+				}
+				%>
 			</div>
-			<%
-			rankidx++;
-			if (rankidx > 3)
-				break;
-			}
-			%>
 			<div class="rank-title">내 순위</div>
 			<div class="rank-item">
-				<c:if test="${myRank == null}">
+				<c:if test="${empty nickname}">
 					<div>로그인 후 확인하세요.</div>
 				</c:if>
-				<c:if test="${myRank != null}">
-					<span class="r"><%=myRank.getIdx()%>위</span>
-					<span class="n"><%=myRank.getNickname()%></span>
-					<span class="wl">win: <%=myRank.getWin()%> / lose: <%=myRank.getLose()%></span>
+				<c:if test="${!empty nickname}">
+					<div class="center">
+						<span class="n"><%=myRank.getNickname()%>님은 </span> <span
+							class="wl"><%=myRank.getWin()%>승 <%=myRank.getLose()%>패로</span> <span
+							class="r"><%=myRank.getIdx()%>위 입니다.</span>
+					</div>
 				</c:if>
 			</div>
 		</div>

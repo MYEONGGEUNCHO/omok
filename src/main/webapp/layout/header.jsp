@@ -17,6 +17,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+// 헤더 상단 마우스 오버 시 슬라이드 구현
 	$(function() {
 		$(".depth2").hide();
 		$(".head_bot").find(".depth1").children().on("mouseover", function() {
@@ -27,12 +28,14 @@
 			$(this).find("ul").slideUp();
 		});
 	});
+	
+	//dom 로드 완료 시 세션에서 userId, nickname 정보 받아오기
 	$(document)
 			.ready(
 					function() {
 <%String userId = (String) session.getAttribute("userId");
 String nickname = (String) session.getAttribute("nickname");
-System.out.println(session.getAttribute("nickname") + "님이 로그인했습니다.");%>
+System.out.println("(header.jsp)"+session.getAttribute("nickname") + "님이 로그인했습니다.");%>
 	})
 </script>
 </head>
@@ -49,7 +52,7 @@ System.out.println(session.getAttribute("nickname") + "님이 로그인했습니
 					<!-- 로그인 상태에서만 게임, 마이페이지 접근 -->
 					<li><a href="">메인메뉴</a>
 						<ul class="depth2">
-							<li><a href="/omok/game/index.jsp">게임</a></li>
+							<li><a href="/omok/room/con/list">게임</a></li>
 							<li><a href="/omok/rank/rank.jsp">랭킹</a></li>
 							<li><a href="/omok/user/mypage.jsp">마이페이지</a></li>
 						</ul></li>
