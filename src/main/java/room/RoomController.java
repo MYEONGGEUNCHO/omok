@@ -49,8 +49,16 @@ public class RoomController extends HttpServlet {
                         room.setUser2(userId);
                         dao.updateRoomUser2(room); // Ensure this method exists to update the user2 in the DB
                         session.setAttribute("roomInfo", room);
+                        //session.setAttribute("role", "guest");
                     }
-                    response.sendRedirect(request.getContextPath() + "/game/wait_jw.jsp"); // Redirect to the waiting or game room page
+                    //1.세션에 role = guest로 설정해서 리다이렉트
+                    //session.setAttribute("role", "guest");
+                    
+                    //2.게스트는 따로 세션에 설정하지 않고 리다이렉트(use) 
+                    response.sendRedirect(request.getContextPath() + "/game/client.jsp?roomId=" + roomId);
+                    
+                    //3.쿼리스트링에 게스트 표시해서 리다이렉트 
+                    //response.sendRedirect(request.getContextPath() + "/room/game.jsp?roomId=" + roomId + "&role=guest");
                 } else {
                     response.sendRedirect(request.getContextPath() + "/room/roomList"); // Redirect back if room is not found
                 }
@@ -93,83 +101,21 @@ public class RoomController extends HttpServlet {
             room.setUser2("");
 
             dao.addRoom(room);
+            
+            RoomVO addedRoom = dao.getRoomByName(roomName);
+            int roomId = addedRoom.getRoomId();
 
             System.out.println("Room created: " + room);
-
+            
+            //1. 세션에 role = host로 설정해서 리다이렉트 (use)
+            session.setAttribute("role", "host");
             session.setAttribute("roomInfo", room);
-            response.sendRedirect(request.getContextPath() + "/game/wait_jw.jsp");
+            response.sendRedirect(request.getContextPath() + "/game/client.jsp?roomId=" + roomId);
+            
+            //2. 쿼리스트링에 호스트 표시해서 리다이렉트 
+            //response.sendRedirect(request.getContextPath() + "/room/game.jsp?roomId=" + roomId + "&role=host");
         }
     }
-
-    
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String action = request.getPathInfo();
-//        if ("/createRoom".equals(action)) {
-//            System.out.println("doPost accessed");
-//
-//            String roomName = request.getParameter("roomName");
-//            int time = Integer.parseInt(request.getParameter("time"));
-//            HttpSession session = request.getSession();
-//            String user1 = (String) session.getAttribute("userId");
-//
-//            System.out.println("Room Name: " + roomName);
-//            System.out.println("Time: " + time);
-//            System.out.println("User1 ID: " + user1);
-//
-//            RoomVO room = new RoomVO();
-//            room.setRoomName(roomName);
-//            room.setTime(time);
-//            room.setUser1(user1);
-//            room.setUser2("");
-//
-//            dao.addRoom(room);
-//
-//            System.out.println("Room created: " + room);
-//
-//            session.setAttribute("roomInfo", room);
-//            response.sendRedirect(request.getContextPath() + "/game/wait");
-//        }
-//    }
-
-    
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String action = request.getPathInfo();
-//        if ("/createRoom".equals(action)) {
-//            System.out.println("doPost는 들어오나?");
-//
-//            // 방 이름과 시간을 요청 파라미터에서 가져옴
-//            String roomName = request.getParameter("roomName");
-//            int time = Integer.parseInt(request.getParameter("time"));
-//
-//            // 세션에서 사용자 ID 가져오기
-//            HttpSession session = request.getSession();
-//            String user1 = (String) session.getAttribute("userId");
-//            
-//            // 로깅을 통해 확인
-//            System.out.println("Room Name: " + roomName);
-//            System.out.println("Time: " + time);
-//            System.out.println("User1 ID: " + user1);
-//
-//            // RoomVO 객체 생성 및 설정
-//            RoomVO room = new RoomVO();
-//            room.setRoomName(roomName);
-//            room.setTime(time);
-//            room.setUser1(user1);
-//            room.setUser2(""); // 초기에는 user2가 없음
-//
-//            // Room 정보를 데이터베이스에 저장
-//            dao.addRoom(room);
-//
-//            // 로그 출력
-//            System.out.println("Room created: " + room.toString());
-//
-//            // 생성된 방 정보를 세션에 저장
-//            session.setAttribute("roomInfo", room);
-//
-//            // 사용자를 게임 대기 페이지로 리다이렉트
-//            response.sendRedirect(request.getContextPath() + "/game/wait");
-//        }
-//    }
 
 }
 
