@@ -252,4 +252,50 @@ public class UserDAO {
 	        try { con.close(); } catch (Exception e) {}
 	    }
 	}
+	public UserVO getPlayer(int roomId) {
+		UserVO userVO = null;
+
+		try {
+			con = dataFactory.getConnection();
+			String query = "SELECT user1 FROM room WHERE roomid = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, roomId);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				String user1 = rs.getString("user1");
+				System.out.println(user1);
+				userVO = getUserInfo(user1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return userVO;
+	}
+
+	public UserVO getUserInfo(String userId) {
+		UserVO vo = null;
+
+		try {
+			con = dataFactory.getConnection();
+			String query = "SELECT nickname, profile, win, lose FROM users WHERE userId = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				vo = new UserVO();
+				vo.setNickname(rs.getString("nickname"));
+				vo.setProfile(rs.getString("profile"));
+				vo.setWin(rs.getInt("win"));
+				vo.setLose(rs.getInt("lose"));
+				System.out.println(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
+	}
+	
 }
