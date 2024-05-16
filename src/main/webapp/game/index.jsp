@@ -145,6 +145,7 @@ RankVO myRank = dao.myrank(userId);
 		function recieveMessage(x, y, currentPlayer, state) {
 			console.log("client> message from server : " + x + " " + y + " " + currentPlayer + " " + state);
 			if (state == "goodPostion") {
+// 				돌 그리는 로직 수정필요
 				drawStone(x, y, currentPlayer);
 				currentPlayer = (currentPlayer == 1) ? 2 : 1;
 				finish = false;
