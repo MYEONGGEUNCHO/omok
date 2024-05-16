@@ -31,7 +31,7 @@ public class RankDAO {
 		ResultSet rs = null;
 		try {
 			con = dataFactory.getConnection();
-			String query = "SELECT * FROM (SELECT nickname, win, lose, RANK() OVER (ORDER BY win DESC) AS rank FROM users)"
+			String query = "SELECT * FROM (SELECT nickname, win, lose, DENSE_RANK() OVER (ORDER BY win DESC) AS rank FROM users)"
 					+ " WHERE rank <= 3";
 			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();
@@ -41,6 +41,7 @@ public class RankDAO {
 				rank.setNickname(rs.getString("nickname"));
 				rank.setWin(rs.getInt("win"));
 				rank.setLose(rs.getInt("lose"));
+				rank.setIdx(rs.getInt("rank"));
 				list.add(rank);
 			}
 

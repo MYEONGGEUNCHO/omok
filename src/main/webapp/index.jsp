@@ -2,15 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
-<%@ include file="layout/header.jsp"%>
+<%@ include file="/layout/header.jsp"%>
 </head>
-<%
-String userId = (String) session.getAttribute("userId");
-%>
 
 <body>
-	<%--//main 부분을 ajax로 가져와서 동적으로 변경 
-	 //--> 메인(로그인)부터 회원가입, 로그인 완료 화면까지 --%>
 	<main>
 		<c:set var="state" value="signup" />
 
@@ -19,7 +14,16 @@ String userId = (String) session.getAttribute("userId");
 			<%@ include file="/user/loginForm.jsp"%>
 		</c:if>
 		<c:if test="${!empty userId}">
-			<%@ include file="/user/afterLogin.jsp"%>
+			<div class="after-login">
+				<div class="login-title"><%=nickname%>님 안녕하세요
+				</div>
+				<div class="after-button">
+					<button type="button"
+						onclick="location.href='/omok/lobby/index.jsp'">접속하기</button>
+					<br>
+					<button type="button" onclick="location.href='/omok/logout'">로그아웃</button>
+				</div>
+			</div>
 		</c:if>
 
 	</main>

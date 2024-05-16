@@ -47,32 +47,12 @@ public class RoomDAO {
     }
 
 
-//    public void addRoom(RoomVO vo) {
-//        try {
-//            con = dataFactory.getConnection();
-//            String query = "INSERT INTO room (roomId, roomName, time, user1, user2)\n"
-//            		+ "VALUES (room_seq.NEXTVAL, ?, ?, ?, ?);";
-//            pstmt = con.prepareStatement(query);
-//            pstmt.setInt(1, vo.getRoomId());
-//            pstmt.setString(2, vo.getRoomName());
-//            pstmt.setInt(3, vo.getTime());
-//            pstmt.setString(4, vo.getUser1());
-//            pstmt.setString(5, vo.getUser2());
-//            pstmt.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            close(pstmt);
-//            close(con);
-//        }
-//    }
-
     public List<RoomVO> listRooms() {
         List<RoomVO> rooms = new ArrayList<>();
         ResultSet rs = null;
         try {
             con = dataFactory.getConnection();
-            String query = "SELECT * FROM room";
+            String query = "SELECT * FROM room WHERE user2 IS NULL OR user2 = ''";
             pstmt = con.prepareStatement(query);
             rs = pstmt.executeQuery();
 
@@ -94,6 +74,33 @@ public class RoomDAO {
         }
         return rooms;
     }
+//    public List<RoomVO> listRooms() {
+//        List<RoomVO> rooms = new ArrayList<>();
+//        ResultSet rs = null;
+//        try {
+//            con = dataFactory.getConnection();
+//            String query = "SELECT * FROM room";
+//            pstmt = con.prepareStatement(query);
+//            rs = pstmt.executeQuery();
+//
+//            while (rs.next()) {
+//                RoomVO room = new RoomVO();
+//                room.setRoomId(rs.getInt("roomId"));
+//                room.setRoomName(rs.getString("roomName"));
+//                room.setTime(rs.getInt("time"));
+//                room.setUser1(rs.getString("user1"));
+//                room.setUser2(rs.getString("user2"));
+//                rooms.add(room);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            close(rs);
+//            close(pstmt);
+//            close(con);
+//        }
+//        return rooms;
+//    }
 
     private void close(AutoCloseable ac) {
         if (ac != null) {
@@ -133,6 +140,36 @@ public class RoomDAO {
         }
         return room;
     }
+    
+    public RoomVO getRoomByName(String roomName) {
+        RoomVO room = null;
+        ResultSet rs = null;
+        try {
+            con = dataFactory.getConnection();
+            String query = "SELECT * FROM room WHERE roomName = ?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, roomName);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                room = new RoomVO();
+                room.setRoomId(rs.getInt("roomId"));
+                room.setRoomName(rs.getString("roomName"));
+                room.setTime(rs.getInt("time"));
+                room.setUser1(rs.getString("user1"));
+                room.setUser2(rs.getString("user2"));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException in getRoomByName: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+            close(con);
+        }
+        return room;
+    }
+
     
     public void updateRoomUser2(RoomVO room) {
         try {
