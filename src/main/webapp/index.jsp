@@ -1,20 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>신한DS 오목</title>
-    <link rel="stylesheet" href="./css/reset.css" />
-    <link rel="stylesheet" href="./css/common.css" />
-  </head>
-  <body>
-  <%@ include file="layout/header.jsp" %>
-    <main>
-      <img src="logo" alt="main_logo" />
-      <%@ include file="form/loginForm.jsp" %>
-    </main>
-    <%@ include file="layout/footer.jsp" %>
-  </body>
-</html>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<head>
+<%@ include file="/layout/header.jsp"%>
+</head>
+
+<body>
+	<main>
+		<c:set var="state" value="signup" />
+
+		<%@ include file="/layout/mainContainer.jsp"%>
+		<c:if test="${empty userId}">
+			<%@ include file="/user/loginForm.jsp"%>
+		</c:if>
+		<c:if test="${!empty userId}">
+			<div class="after-login">
+				<div class="login-title"><%=nickname%>님 안녕하세요
+				</div>
+				<div class="after-button">
+					<button type="button"
+						onclick="location.href='/omok/lobby/index.jsp'">접속하기</button>
+					<br>
+					<button type="button" onclick="location.href='/omok/logout'">로그아웃</button>
+				</div>
+			</div>
+		</c:if>
+
+	</main>
+</body>
+<%@ include file="layout/footer.jsp"%>

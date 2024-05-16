@@ -1,0 +1,324 @@
+/* grid 배치로 변경 */
+.game_container {
+	display: grid;
+	grid-template-columns: 2fr 5.5fr 2fr;
+	grid-template-rows: 0vh 35vh 65px 35vh 85px;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	grid-template-areas: "header header header"
+		"player1 play_container chat_container"
+		"game_status play_container chat_container"
+		"player2 play_container chat_container"
+		"game_buttons play_container chat_container";
+	place-items: center;
+	width: 100%;
+}
+
+.header {
+	grid-area: header;
+}
+
+.footer {
+	grid-area: footer;
+}
+
+.chat_container {
+	grid-area: chat_container;
+}
+
+.player1 {
+	grid-area: player1;
+}
+
+.game_status {
+	grid-area: game_status;
+}
+
+.player2 {
+	grid-area: player2;
+}
+
+.play_container {
+	display: grid;
+	grid-area: play_container;
+	place-items: center;
+	width: 100%;
+}
+
+.game_buttons {
+	display: flex;
+	grid-area: game_buttons;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 90%;
+}
+
+.game_container>* {
+	margin: 1%;
+}
+
+.player_side>* {
+	margin-bottom: 10%;
+}
+
+.player_card {
+	width: 25vh;
+	height: 35vh;
+	border: 5px solid #ccaca6;
+	background: #ffd7cf;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+	align-items: center;
+}
+
+.player_card>* {
+	margin: 1% 0;
+}
+
+.player_card>.profile {
+	width: 92%;
+	height: 60%;
+	background: white;
+}
+.profile>img {
+	width:100%;
+	height:100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
+.player_card>.nickname {
+	font-size: 2vw;
+	font-weight: 700;
+	text-align: center;
+	line-height: 3vw;
+}
+
+.player_card>.winlose {
+	font-size: 1.5vw;
+	text-align: center;
+}
+
+.game_buttons>* {
+	width: 30%;
+	padding: 2%;
+	border-radius: 30px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px -2px 2px
+		rgba(0, 0, 0, 0.25);
+	border: 1px solid #7f6b67;
+	box-sizing: border-box;
+}
+
+.omok_board {
+	width: 45vw;
+	height: 45vw;
+	background: #ccaca6;
+	border: 6px solid #7f6b67;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-collapse: separate;
+	table-layout: fixed;
+	border-radius: 20px;
+}
+
+.omok_board_click {
+	position: absolute;
+	border-collapse: separate;
+	table-layout: fixed;
+	z-index: 3;
+}
+
+.omok_board_click .cell {
+	width: 3vw;
+	height: 3vw;
+	table-layout: fixed;
+	border: 1.5px solid rgba(0, 0, 0, 0);
+	cursor: pointer;
+}
+
+.omok_board_click .cell:hover {
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.cell {
+	border: 1.5px solid #7f6b67;
+	width: 3vw;
+	height: 3vw;
+	table-layout: fixed;
+}
+
+.black_dol {
+	background: #7C7E7F;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	box-shadow: inset -4px -4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.white_dol {
+	background: #F9FCFF;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	box-shadow: inset -4px -4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.chat_container {
+	width: 90%;
+	height: 100%;
+	background: #ffd7cf;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.game_chat {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 90%;
+}
+
+.game_chat>div {
+	margin-top: 2%;
+	padding: 2%;
+}
+
+.game_chat * {
+	color: black;
+}
+
+.my_chat {
+	margin-left: 5%;
+	text-align: right;
+	background: #fcffe7;
+	width: 100%;
+	line-height: 30px;
+}
+
+.notice {
+	text-align: center;
+	font-weight: 700;
+}
+
+#your_chat_container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	margin-right: 5%;
+}
+
+.your_profile {
+	background: white;
+	border-radius: 50%;
+	width: 45px;
+	height: 45px;
+}
+
+.your_chat {
+	text-align: left;
+	background: #f9fcff;
+	width: 65%;
+	margin-left: 2%;
+	padding: 2%;
+	line-height: 30px;
+}
+
+.input_chat {
+	width: 95%;
+	height: 6em;
+	margin-bottom: 3%;
+	border-radius: 15px;
+	background: #f9fcff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.chat {
+	width: 95%;
+	height: 6em;
+	border-radius: 15px;
+	background: #f9fcff;
+}
+
+#sendbtn {
+	background: none;
+	background-repeat: no-repeat;
+	width: 28px;
+	padding-right: 2%;
+	border: none;
+	background-size: contain;
+	border-radius: 0;
+	cursor: pointer;
+}
+
+#black_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 120%;
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	z-index: 1;
+	margin: 0%;
+}
+
+.alert {
+	background-image: linear-gradient(to bottom, #ffffff 25px, #ffd7ce 25px);
+	border: 1px solid #ccaca6;
+	border-radius: 3%;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	padding: 5%;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.alert>* {
+	margin: 2%;
+	width: 80%;
+}
+
+.alert>.close_btn {
+	margin: 0;
+}
+
+.profile {
+	width: 16em;
+	height: 10em;
+	background: white;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.profile_img {
+	height: 70%;
+	position: absolute;
+}
+
+.congratulations {
+	font-size: 2em;
+	text-align: center;
+	width: 15em;
+}
+
+.ok_btn {
+	margin-top: 5%;
+	line-height: 2em;
+	font-size: 1.5em;
+	width: 4em;
+}
