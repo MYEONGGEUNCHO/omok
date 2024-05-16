@@ -1,96 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<% String nickname = (String) session.getAttribute("nickname"); %>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>오목 게임</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-    canvas {
-        border: 1px solid #000;
-        cursor: pointer;
-        background-color: yellow;
-    }
-    .button-group {
-        margin-top: 10px;
-    }
-    
-    #_chatbox {
-        align-items: center;
-        display: block;
-        background-color: #ffd7cf; 
-        width: 300px; 
-        height: 650px;
-        
-        position: relative;
-    }
-    #sendbox {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border: none;
-    }
-   
-    #messageWindow{  
-        max-height: 600px;
-        overflow-y: overlay;
-    }
-    
-    #messageWindow::-webkit-scrollbar {
-        width: 5px;  /* 스크롤바의 너비 */
-    }
-    
-    #messageWindow::-webkit-scrollbar-thumb {
-    height: 20%; /* 스크롤바의 길이 */
-    background: #fff; /* 스크롤바의 색상 */
-    border-radius: 10px;
-}
-    #messageWindow::-webkit-scrollbar-track {
-        box-shadow: none;
-        background-color: transparent;
-    }
-    #inputMessage{
-    	margin-left: 20px;
-    }
-    
-    .chat_content1{
-        padding: 4px;
-        width: fit-content;
-        background-color: #fff;
-        clear:both;
-        border-radius: 10px;
-    }
-    .chat_content2{
-        padding: 4px;
-        width: fit-content;
-        background-color: #FCFFE7;
-        float: right; 
-        clear:both;
-        border-radius: 10px;
-    }
-    
-    .profile_ic{
-    	width: 20px;
-    	height: 20px;
-    	border-radius: 50%;
-    	margin-bottom: 2px;
-    }
-    .notice {
-    	text-align: center;
-    	align-content: center;
-    	background-color: white;
-    	font-size: 14px;
-    }
-</style>
+<link rel="stylesheet" href="game.css" />
+<%@include file="../layout/header.jsp"%>
+<script src="game.js"></script>
 </head>
 <body>
 <canvas id="omokCanvas" width="600" height="600"></canvas>
@@ -322,4 +235,4 @@
 
 </script>
 </body>
-</html>
+<%@include file="../layout/footer.jsp"%>

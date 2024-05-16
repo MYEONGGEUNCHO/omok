@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+}
+
+#game_container {
+	height: 100%;
+	display: grid;
+	grid-template-areas: "header header header"
+		"player1 board chat" "state board chat" "player2 board chat" "buttons board chat" "footer footer footer";
+	grid-template-rows: 150px repeat(3, 1fr) 100px;
+	grid-template-columns: 300px 1fr 200px;
+	gap: 10px;
+}
+
+.box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background-color: pink;
+}
+
+.header {
+	grid-area: header;
+}
+
+.menu {
+	grid-area: menu;
+}
+
+.main {
+	grid-area: main;
+}
+
+.top {
+	grid-area: top;
+}
+
+.bottom {
+	grid-area: bottom;
+}
+
+.footer {
+	grid-area: footer;
+}
+</style>
+</head>
+
+<body>
+	<div class="parent">
+		<div class="box header">Header - 높이 150px</div>
+		<div class="box menu">Mennu - 300px</div>
+		<div class="box main">Main</div>
+		<div class="box top">Top - 너비 200px</div>
+		<div class="box bottom">Bottom - 너비 200px</div>
+		<div class="box footer">Footer - 높이 100px</div>
+	</div>
+</body>
+
+</html>

@@ -175,6 +175,9 @@ public class UserDAO {
 				vo = new UserVO();
 				vo.setUserId(rs.getString("userId"));
 				vo.setNickname(rs.getString("nickname"));
+				vo.setProfile(rs.getString("profile"));
+				vo.setWin(rs.getInt("win"));
+				vo.setLose(rs.getInt("lose"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

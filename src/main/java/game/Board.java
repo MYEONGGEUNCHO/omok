@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Board {
 	// 게임 관련 변수들
-	private final int SIZE = 15;
+	private final int SIZE = 16;
 	Integer[][] board = new Integer[SIZE][SIZE];
 	// 게임 종료 여부
 	boolean finish = false;
