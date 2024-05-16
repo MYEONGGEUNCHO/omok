@@ -39,7 +39,13 @@ String profile = (String) session.getAttribute("profile");
 Integer my_win = (Integer) session.getAttribute("my_win");
 Integer my_lose = (Integer) session.getAttribute("my_lose");
 System.out.println("(header.jsp)" + session.getAttribute("nickname") + "님이 로그인했습니다.");
-System.out.println(profile + " : " + my_win + " : " + my_lose);%>
+System.out.println(profile + " : " + my_win + " : " + my_lose);
+
+if (userId == null && request.getRequestURI() != "/omok/index.jsp") {%>
+		alert('로그인 후 이용하세요.');
+		location.href="<%=request.getContextPath()%>
+	/index.jsp";
+<%}%>
 	})
 </script>
 </head>
