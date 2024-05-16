@@ -16,7 +16,9 @@ public class Board {
             Arrays.fill(board[i], 0);
         }
     }
-    
+    public Integer[][] getBoard() {
+    	return board;
+    }
     // 콘솔 출력 확인용
     public void printBoard() {
     	System.out.println();
@@ -32,7 +34,6 @@ public class Board {
 
     public boolean setStone(int x, int y, int currentPlayer) {
         if (x < 0 || x >= SIZE || y < 0 || y >= SIZE || board[y][x] != 0) {
-        	System.out.println("보드 판 벗어남 or 이미 돌이 놓아진 위치임");
             return false;
         }
         
@@ -83,7 +84,7 @@ public class Board {
         	if (count33 > 1 || count44 > 1) {
         		// 무르기 실행
         		back(x, y);
-        	    //System.out.println("착수 할 수 없습니다.");
+        	    System.out.println("33롤 44롤 걸림*** 착수 할 수 없습니다.");
         		return "badPosition";
         	}
         }
@@ -98,7 +99,8 @@ public class Board {
         		return winner;
         	}
     	}
-        return "goodPostion";
+        System.out.println("Board.java) 아무것도 안걸리고 굿포지션");
+        return "goodPosition";
     }
     
     // 무르기 기능 메서드
