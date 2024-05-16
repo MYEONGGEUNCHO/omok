@@ -43,7 +43,10 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("loginSession", loginVO);
 			session.setAttribute("userId", loginVO.getUserId());
 			session.setAttribute("nickname", loginVO.getNickname());
-			
+			session.setAttribute("profile", loginVO.getProfile());
+			session.setAttribute("my_win", loginVO.getWin());
+			session.setAttribute("my_lose", loginVO.getLose());
+//			System.out.println(session.getAttribute("profile"));
 			request.setAttribute("userId", loginVO.getUserId());
 			request.setAttribute("nickname", loginVO.getNickname());
 //			response.sendRedirect("/omok/index.jsp");

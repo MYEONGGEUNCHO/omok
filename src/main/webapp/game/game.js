@@ -1,23 +1,23 @@
 
-// 화면에 보드판 그리기 기능
-function drawBoard() {
-	ctx.fillStyle = 'yellow'; // 배경색을 노란색으로 설정
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	// 오목판 그리기
-	ctx.strokeStyle = '#000'; // 선 색상을 검은색으로 설정
-	for (let i = 0; i <= boardSize; i++) {
-		ctx.beginPath();
-		ctx.moveTo(i * cellSize, 0);
-		ctx.lineTo(i * cellSize, canvas.height);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(0, i * cellSize);
-		ctx.lineTo(canvas.width, i * cellSize);
-		ctx.stroke();
-	}
-}
+//// 화면에 보드판 그리기 기능
+//function drawBoard() {
+//	ctx.fillStyle = 'yellow'; // 배경색을 노란색으로 설정
+//	ctx.fillRect(0, 0, canvas.width, canvas.height);
+//
+//	// 오목판 그리기
+//	ctx.strokeStyle = '#000'; // 선 색상을 검은색으로 설정
+//	for (let i = 0; i <= boardSize; i++) {
+//		ctx.beginPath();
+//		ctx.moveTo(i * cellSize, 0);
+//		ctx.lineTo(i * cellSize, canvas.height);
+//		ctx.stroke();
+//
+//		ctx.beginPath();
+//		ctx.moveTo(0, i * cellSize);
+//		ctx.lineTo(canvas.width, i * cellSize);
+//		ctx.stroke();
+//	}
+//}
 
 /*   무르기 기능 미완
 const button = document.getElementById('mu');
@@ -27,13 +27,13 @@ const button = document.getElementById('mu');
  });
  */
 // 화면에 돌 그리기 기능
-function drawStone(x, y, player) {
-	const stoneColor = (player === 1) ? '#000' : '#FFF';
-	ctx.beginPath();
-	ctx.arc(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize / 2 - 2, 0, 2 * Math.PI);
-	ctx.fillStyle = stoneColor;
-	ctx.fill();
-}
+//function drawStone(x, y, player) {
+//	const stoneColor = (player === 1) ? '#000' : '#FFF';
+//	ctx.beginPath();
+//	ctx.arc(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize / 2 - 2, 0, 2 * Math.PI);
+//	ctx.fillStyle = stoneColor;
+//	ctx.fill();
+//}
 
 
 canvas.addEventListener('click', handleClick);
@@ -55,11 +55,11 @@ function handleClick(event) {
 
 
 $(document).ready(function() {
-	const canvas = document.getElementById('omokCanvas');
-	const ctx = canvas.getContext('2d');
-	const boardSize = 15;
-	const cellSize = canvas.width / boardSize;
-	drawBoard();
+//	const canvas = $('#omokCanvas');
+//	const ctx = canvas.getContext('2d');
+//	const boardSize = 15;
+//	const cellSize = canvas.width / boardSize;
+//	drawBoard();
 
 
 

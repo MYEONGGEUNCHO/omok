@@ -17,7 +17,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-// 헤더 상단 마우스 오버 시 슬라이드 구현
+	// 헤더 상단 마우스 오버 시 슬라이드 구현
 	$(function() {
 		$(".depth2").hide();
 		$(".head_bot").find(".depth1").children().on("mouseover", function() {
@@ -28,14 +28,18 @@
 			$(this).find("ul").slideUp();
 		});
 	});
-	
+
 	//dom 로드 완료 시 세션에서 userId, nickname 정보 받아오기
 	$(document)
 			.ready(
 					function() {
 <%String userId = (String) session.getAttribute("userId");
 String nickname = (String) session.getAttribute("nickname");
-System.out.println("(header.jsp)"+session.getAttribute("nickname") + "님이 로그인했습니다.");%>
+String profile = (String) session.getAttribute("profile");
+Integer my_win = (Integer) session.getAttribute("my_win");
+Integer my_lose = (Integer) session.getAttribute("my_lose");
+System.out.println("(header.jsp)" + session.getAttribute("nickname") + "님이 로그인했습니다.");
+System.out.println(profile + " : " + my_win + " : " + my_lose);%>
 	})
 </script>
 </head>

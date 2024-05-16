@@ -7,7 +7,6 @@
 </head>
 <body>
 	<main>
-		<%@include file="../layout/mainContainer.jsp"%>
 		<canvas id="omokCanvas" width="600" height="600"></canvas>
 		<button id="mu">무르기</button>
 		<img class="chat_icon" src="/omok/images/chat_icon.png" width="100px"
