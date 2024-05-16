@@ -26,7 +26,6 @@
 				console.log(data);
 				if (data == 'usable') {
 					$("#message").text('사용할 수 있는 ID입니다.');
-					$("#id_check").prop("disabled", true);
 					id_check = true;
 				} else {
 					$("#message").text('사용할 수 없는 ID입니다.');
@@ -60,51 +59,64 @@
 	var pwdOk = false;
 	$(document).ready(
 			function() {
+				$("#userId").change(function() {
+					id_check = false;
+				})
+				if(id_check == true) {
+					$("#id_check").prop("disabled", true);
+				}
+				
 				// 		비밀번호 변경될때마다 체크 후 조건 확인
-				$("#password1").change(function() {
-					var p1 = $("#password1").val();
-					var p2 = $("#password2").val();
-					if (p1 == "" || p2 == "") {
-						$("#password_check").html("비밀번호와 비밀번호 확인을 채워주세요.");
-					}
-					if (p1.length > 30 || p2.length > 30) {
-						$("#password_check").html("비밀번호는 30자 이내로 작성해주세요.");
-						pwdOk = false;
-						return;
-					}
-					if (p1 != p2) {
-						$("#password_check").html("비밀번호가 일치하지 않습니다.");
-						pwdOk = false;
-						return;
-					}
-					if (p1 == p2 && p1.length < 30 && p2.length <= 30) {
-						$("#password_check").html("사용 가능한 비밀번호 입니다.");
-						pwdOk = true;
-					}
-					console.log(p1, p2);
-				})
-				$("#password2").change(function() {
-					var p1 = $("#password1").val();
-					var p2 = $("#password2").val();
-					if (p1 == "" || p2 == "") {
-						$("#password_check").html("비밀번호와 비밀번호 확인을 채워주세요.");
-					}
-					if (p1.length > 30 || p2.length > 30) {
-						$("#password_check").html("비밀번호는 30자 이내로 작성해주세요.");
-						pwdOk = false;
-						return;
-					}
-					if (p1 != p2) {
-						$("#password_check").html("비밀번호가 일치하지 않습니다.");
-						pwdOk = false;
-						return;
-					}
-					if (p1 == p2 && p1.length < 30 && p2.length <= 30) {
-						$("#password_check").html("사용 가능한 비밀번호 입니다.");
-						pwdOk = true;
-					}
-					console.log(p1, p2);
-				})
+				$("#password1").change(
+						function() {
+							var p1 = $("#password1").val();
+							var p2 = $("#password2").val();
+							if (p1 == "" || p2 == "") {
+								$("#password_check").html(
+										"비밀번호와 비밀번호 확인을 채워주세요.");
+							}
+							if (p1.length > 30 || p2.length > 30) {
+								$("#password_check").html(
+										"비밀번호는 30자 이내로 작성해주세요.");
+								pwdOk = false;
+								return;
+							}
+							if (p1 != p2) {
+								$("#password_check").html("비밀번호가 일치하지 않습니다.");
+								pwdOk = false;
+								return;
+							}
+							if (p1 == p2 && p1 != "" && p1.length < 30
+									&& p2.length <= 30) {
+								$("#password_check").html("사용 가능한 비밀번호 입니다.");
+								pwdOk = true;
+							}
+						})
+				$("#password2").change(
+						function() {
+							var p1 = $("#password1").val();
+							var p2 = $("#password2").val();
+							if (p1 == "" || p2 == "") {
+								$("#password_check").html(
+										"비밀번호와 비밀번호 확인을 채워주세요.");
+							}
+							if (p1.length > 30 || p2.length > 30) {
+								$("#password_check").html(
+										"비밀번호는 30자 이내로 작성해주세요.");
+								pwdOk = false;
+								return;
+							}
+							if (p1 != p2) {
+								$("#password_check").html("비밀번호가 일치하지 않습니다.");
+								pwdOk = false;
+								return;
+							}
+							if (p1 == p2 && p1 != "" && p1.length < 30
+									&& p2.length <= 30) {
+								$("#password_check").html("사용 가능한 비밀번호 입니다.");
+								pwdOk = true;
+							}
+						})
 				// 		프로필 선택에 따른 이미지 노출
 				// select 요소의 값이 변경될 때마다 실행됩니다.
 				$("select[name='profile']").change(
@@ -149,7 +161,7 @@
 
 		<form action="/omok/createUser" method="post" name="frmMember"
 			id="frmMember">
-			<div>
+			<div class="id_form">
 				<input type="text" id="userId" name="userId" placeholder="아이디">
 				<input type="button" id="id_check" value="중복확인"
 					onclick="btn_duplicate()">

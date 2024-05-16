@@ -1,11 +1,11 @@
 .create_room_container {
 	background: #f9fcff;
-	width: 30%; /* Adjusted width */
-	height: 30%;
+	width: 35%; /* Adjusted width */
+	height: 40%;
 	display: flex;
 	flex-direction: column;
 	align-items: center; /* Centering content horizontally */
-	padding: 2%;
+	padding: 3%;
 }
 
 .create_room_container>* {
