@@ -15,7 +15,6 @@ RankDAO dao = new RankDAO();
 List<RankVO> rankList = dao.rank();
 // 현재 사용자의 순위 정보 가져오기
 RankVO myRank = dao.myrank(userId);
-System.out.println("(rank.jsp)myRank.getNickname() : " + myRank.getNickname());
 %>
 <body>
 	<main>
