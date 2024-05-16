@@ -14,8 +14,21 @@ RankVO myRank = dao.myrank(userId);
 %>
 <script>
 	function deleteUser() {
-		alert('1')
-		//$("#deleteUser").get("/omok/deleteUser")
+		// form 요소를 직접 찾아서 submit
+		var form = document.getElementById("deleteForm");
+		if (confirm("정말 삭제하시겠습니까??") == true) { // 확인
+			form.submit();
+		} else { // 취소
+			return;
+		}
+	}
+
+	function updateUser() {
+		if (confirm("정말 수정하시겠습니까?") == true){    //확인
+			document.getElementById("updateUser").submit();
+		}else{   //취소
+			return;
+		}
 	}
 	$(document).ready(
 			function() {
@@ -67,7 +80,10 @@ RankVO myRank = dao.myrank(userId);
 
 				<!-- 회원탈퇴 먼가 한번에 못하게 걸어야 할거 같은데 코드리뷰하면서 얘기하기  -->
 				<div class="mypage_buttotns">
-					<button type="button" onclick="deleteUser()" id="deleteUser">회원탈퇴</button>
+					<!-- form 태그에 ID 추가 -->
+					<form id="deleteForm" action="/omok/deleteUser" method="post">
+						<button type="button" onclick="deleteUser()" name="deleteForm">회원탈퇴</button> <br>
+					</form>
 					<input type="submit" value="변경 내용 저장" />
 				</div>
 			</form>

@@ -3,13 +3,18 @@
 <%@ page import="rank.RankVO"%>
 <%@ page import="rank.RankDAO"%>
 <%@ page import="java.util.List"%>
+<%@ page import="account.user.UserDAO"%>
+<%@ page import="account.user.UserVO"%>
+<%@ page import="java.lang.System"%>
 <head>
 <%@ include file="/layout/header.jsp"%>
 <%
 String type = (String) session.getAttribute("profile");
-RankDAO dao = new RankDAO();
+String role = (String) session.getAttribute("role");
+System.out.println(role);
+RankDAO rdao = new RankDAO();
 // 현재 사용자의 순위 정보 가져오기
-RankVO myRank = dao.myrank(userId);
+RankVO myRank = rdao.myrank(userId);
 %>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/game/game.css" />
@@ -57,6 +62,8 @@ RankVO myRank = dao.myrank(userId);
 		});
 	})
 	var ws;
+	
+	
 	/*		채팅 관련 함수		*/
 
 	// (채팅)채팅 응답 처리
@@ -174,11 +181,17 @@ RankVO myRank = dao.myrank(userId);
 		ws = new WebSocket(socketLink);
 		var inputMessage = $('#inputMessage');
 		var textarea = $('.game_chat');
-		var nickname = "<%=nickname%>";
+		
+		var nickname = "<%=nickname%>"; 
+		var profile = "<%=profile%>";
+		var win = <%=my_win%>;
+	    var lose = <%=my_lose%>;
+		
 		// 서버와 연결된 경우 실행
 		ws.onopen = function() {
 			textarea.append("<div class='notice'>채팅에 참여하였습니다.</div>");
-			console.log("client> connected to server")
+			console.log("client> connected to server");
+			sendSessionInfo();
 		};
 
 		//서버로부터 메세지 받은 경우 실행 
@@ -197,6 +210,9 @@ RankVO myRank = dao.myrank(userId);
 				case 'gomok':	// 오목 게임 관련 데이터 처리
 					handleGomokMessage(receivedData);
 					break;
+				case 'sessionInfo':
+			    	handlesessionInfo(receivedData);
+			    	break;
 				default:
 					console.log('Unknown message type:', receivedData.type);
 			}
@@ -205,7 +221,32 @@ RankVO myRank = dao.myrank(userId);
 		//웹소켓이 닫혔을 때 실행
 		ws.onclose = function(event) {
 			$(".game_chat").append("<div class='notice'>채팅이 종료되었습니다.</div>");
-		}		
+		}
+		//서버에서 정보 받아와서 처리
+	    function handlesessionInfo(receivedData){
+	    	var nickname = receivedData.nickname;
+	    	var profile = receivedData.profile;
+	        var win = receivedData.win;
+	        var lose = receivedData.lose;
+
+	        // 가져온 값을 사용하여 필요한 처리 수행
+	        console.log("닉네임: " + nickname + ", 승: " + win + ", 패: " + lose);
+	        //가져온 값으로 화면에 표시
+	        document.getElementById('player_profile').innerText = profile; //값에 따라 이미지 처리 해야함
+	        document.getElementById('player_nickname').innerText = nickname;
+	        document.getElementById('player_winlose').innerText = win + '승 ' + lose + '패';
+	    }
+	 // 세션 정보를 서버에 전송하는 함수
+	    function sendSessionInfo() {
+	        let message = {
+	            type: 'sessionInfo',
+	            profile: profile,
+	            nickname: nickname,
+	            win: win,
+	            lose: lose
+	        };
+	        ws.send(JSON.stringify(message));
+	    }
 	})
 </script>
 <!-- <script src="game.js"></script> -->
@@ -222,22 +263,38 @@ RankVO myRank = dao.myrank(userId);
 				<div class="winlose">${my_win }승${my_lose }패</div>
 			</div>
 			<div class="game_status">대기중</div>
-			<div class="player2 player_card">
-				<div class="profile">(이미지2)</div>
-				<div class="nickname">플레이어2</div>
-				<div class="winlose">0승 6패</div>
+			<%
+			if (role != null &&role.equals("host")) { // 호스트인 경우
+			%>
+			<div id="player2" class="player_card">
+				<div class="profile" id="player_profile">대기중</div>
+				<div class="nickname" id="player_nickname">대기중</div>
+				<div class="winlose" id="player_winlose">대기중</div>
 			</div>
-			<div class="game_buttons">
-				<button id="back" type="button" title="뒤로가기">
-					<img src="<%=request.getContextPath()%>/images/back.png" />
-				</button>
-				<button id="sorry" type="button" title="무르기 요청">
-					<img src="<%=request.getContextPath()%>/images/sorry.png" />
-				</button>
-				<button id="surrender" type="button" title="항복하기">
-					<img src="<%=request.getContextPath()%>/images/surrender.png" />
-				</button>
+			<%
+			} else if (role == null) { // 게스트인 경우
+				String roomID = (String) session.getAttribute("roomId");
+				int roomId = Integer.parseInt(roomID);
+
+				if (roomID == null) {
+					System.out.println("룸id가 널값임");
+				} else {
+					System.out.println(roomID);
+				}
+
+			UserDAO dao = new UserDAO(); //정보를 가져오기 위한 dao 객체 생성
+			UserVO user1 = dao.getPlayer(roomId); //room db에 저장되어 있는 user1의 정보 가져오기 일단은 임시
+			%>
+			<div id="player2" class="player_card">
+				<div class="profile"><%=user1.getProfile()%></div>
+				<div class="nickname" id="player2_nickname"><%=user1.getNickname()%></div>
+				<div class="winlose" id="player2_winlose"><%=user1.getWin()%>승
+					<%=user1.getLose()%>패
+				</div>
 			</div>
+			<%
+			}
+			%>
 			<div class="play_container">
 				<table class="omok_board">
 					<!-- 15x15 div 오목판 cell 동적으로 추가할 부분 -->

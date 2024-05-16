@@ -190,64 +190,112 @@ public class UserDAO {
 	 * Users 테이블 회원 삭제 기능
 	 * 
 	 * @param userId: userId
-	 */
-	
+	 */	
 	public void deleteUser(String userId) {
+		Connection con = null;
+	    try {
+	        con = dataFactory.getConnection();
+	        con.setAutoCommit(false); // 자동 커밋 비활성화
+	        String query = "delete from users where userId = ?";
+	        pstmt = con.prepareStatement(query);
+	        pstmt.setString(1, userId);
+	        pstmt.executeUpdate();
+
+	        con.commit(); // 수동으로 커밋
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        try { con.rollback(); } catch (Exception rollbackEx) {} // 롤백
+	    } finally {
+	        // 리소스 정리
+	        try { pstmt.close(); } catch (Exception e) {}
+	        try { con.setAutoCommit(true); } catch (Exception e) {} // 다시 자동 커밋으로 설정
+	        try { con.close(); } catch (Exception e) {}
+	    }
+	}
+	
+	/**
+	 * 마이페이지에서 회원정보를 받아 수정하는 기능
+	 * 
+	 * @param userId
+	 * @param pwd
+	 * @param nickname
+	 */
+	public void updateUser(String userId, String pwd, String nickname) {
+	    try {           
+	        con = dataFactory.getConnection();
+	        if (pwd != "" && nickname != "") {
+	            String query = "update users set pwd = ?, nickname = ?";
+	            pstmt = con.prepareStatement(query);
+	            pstmt.setString(1, pwd);
+	            pstmt.setString(2, nickname);
+	            pstmt.executeUpdate();
+	        } else if (pwd != "") {
+	            String query = "update users set pwd = ?";
+	            pstmt = con.prepareStatement(query);
+	            pstmt.setString(1, pwd);
+	            pstmt.executeUpdate();
+	        } else if (nickname != "") {
+	            String query = "update users set nickname = ?";
+	            pstmt = con.prepareStatement(query);
+	            pstmt.setString(1, nickname);
+	            pstmt.executeUpdate();
+	        }
+	        
+	        // updateUser 메서드 내에서 커밋 수행
+	        con.commit();
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        // 리소스 해제만 수행
+	        try { pstmt.close(); } catch (Exception e) {}
+	        try { con.close(); } catch (Exception e) {}
+	    }
+	}
+	public UserVO getPlayer(int roomId) {
+		UserVO userVO = null;
+
 		try {
-			String query = "delete from users where userId = ?";
+			con = dataFactory.getConnection();
+			String query = "SELECT user1 FROM room WHERE roomid = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, roomId);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				String user1 = rs.getString("user1");
+				System.out.println(user1);
+				userVO = getUserInfo(user1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return userVO;
+	}
+
+	public UserVO getUserInfo(String userId) {
+		UserVO vo = null;
+
+		try {
+			con = dataFactory.getConnection();
+			String query = "SELECT nickname, profile, win, lose FROM users WHERE userId = ?";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, userId);
-			pstmt.executeUpdate();
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				vo = new UserVO();
+				vo.setNickname(rs.getString("nickname"));
+				vo.setProfile(rs.getString("profile"));
+				vo.setWin(rs.getInt("win"));
+				vo.setLose(rs.getInt("lose"));
+				System.out.println(vo);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			
-		} finally {
-			// 커밋 로직
-			try {
-			con = dataFactory.getConnection();
-			String query = "commit";
-			pstmt = con.prepareStatement(query);
-			pstmt.executeUpdate();
-			} catch (Exception e) {}
-			try {pstmt.close();}catch(Exception e) {}
-			try {con.close();}catch(Exception e) {}
 		}
+		return vo;
 	}
 	
-	public void updateUser(String userId, String pwd, String nickname) {
-		try {
-			
-			if (pwd == "" && nickname == "") {
-				String query = "update users set pwd = ?, nickname = ?";
-				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, pwd);
-				pstmt.setString(2, nickname);
-				pstmt.executeUpdate();
-			} else if (pwd == "") {
-				String query = "update users set pwd = ?";
-				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, pwd);
-				pstmt.executeUpdate();
-			} else if (nickname == "") {
-				String query = "update users set nickname = ?";
-				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, nickname);
-				pstmt.executeUpdate();
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-		} finally {
-			// 커밋 로직
-			try {
-			con = dataFactory.getConnection();
-			String query = "commit";
-			pstmt = con.prepareStatement(query);
-			pstmt.executeUpdate();
-			} catch (Exception e) {}
-			try {pstmt.close();}catch(Exception e) {}
-			try {con.close();}catch(Exception e) {}
-		}
-	}
 }
