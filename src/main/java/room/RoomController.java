@@ -49,8 +49,15 @@ public class RoomController extends HttpServlet {
                         room.setUser2(userId);
                         dao.updateRoomUser2(room); // Ensure this method exists to update the user2 in the DB
                         session.setAttribute("roomInfo", room);
+                        //session.setAttribute("role", "guest");
                     }
+                    //1.세션에 role = guest로 설정해서 리다이렉트
+                    //session.setAttribute("role", "guest");
+                    
+                    //2.게스트는 따로 세션에 설정하지 않고 리다이렉트(use) 
                     response.sendRedirect(request.getContextPath() + "/game/client.jsp?roomId=" + roomId);
+                    
+                    //3.쿼리스트링에 게스트 표시해서 리다이렉트 
                     //response.sendRedirect(request.getContextPath() + "/room/game.jsp?roomId=" + roomId + "&role=guest");
                 } else {
                     response.sendRedirect(request.getContextPath() + "/room/roomList"); // Redirect back if room is not found
@@ -99,9 +106,13 @@ public class RoomController extends HttpServlet {
             int roomId = addedRoom.getRoomId();
 
             System.out.println("Room created: " + room);
-
+            
+            //1. 세션에 role = host로 설정해서 리다이렉트 (use)
+            session.setAttribute("role", "host");
             session.setAttribute("roomInfo", room);
-            response.sendRedirect(request.getContextPath() + "/game/client.jsp?roomId=" + roomId + "&role=host");
+            response.sendRedirect(request.getContextPath() + "/game/client.jsp?roomId=" + roomId);
+            
+            //2. 쿼리스트링에 호스트 표시해서 리다이렉트 
             //response.sendRedirect(request.getContextPath() + "/room/game.jsp?roomId=" + roomId + "&role=host");
         }
     }
