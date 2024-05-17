@@ -1,6 +1,8 @@
 package game;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +18,6 @@ import org.json.JSONObject;
 
 @ServerEndpoint("/server")
 public class Server {
-
 	// 연결된 clients 저장
 	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<>());
 
@@ -25,18 +26,18 @@ public class Server {
 
 	@OnOpen
 	public void onOpen(Session session) throws IOException {
+		System.out.println("session on open");
 		if (clients.size() < 2) {
-			
 			clients.add(session);
 			System.out.println("Client connected: " + session.getId());
 			System.out.println("client size : " + clients.size());
-			
+
 		} else {
 			System.out.println("---------------");
 			System.out.println("Maximum clients reached. Cannot accept new connections.");
 		}
 	}
-	
+
 	// client 에게 받은 메세지 처리 (type 구분)
 	@OnMessage
 	public void onMessage(String message, Session session) throws IOException {
@@ -61,11 +62,12 @@ public class Server {
 	}
 
 	private void handleOmokMessage(JSONObject jsonMessage, Session session) throws IOException {
-		int x = (int) jsonMessage.get("x");
-		int y = (int) jsonMessage.get("y");
+		int x = (int) jsonMessage.get("y");
+		int y = (int) jsonMessage.get("x");
+		int turn = (int) jsonMessage.get("turn");
 		int currentPlayer = (int) jsonMessage.get("currentPlayer");
 		String type = jsonMessage.getString("type");
-		System.out.println("Received move data - X: " + x + ", Y: " + y + ", Stone: " + currentPlayer);
+		System.out.println("현재턴 : " + turn + " X: " + x + ", Y: " + y + ", Stone: " + currentPlayer);
 
 		// Board 객체 사용해서 룰 체크 -> 상태(돌 놓는 규칙 위배 여부, 승패 확인) 종류 별로 다르게 클라이언트로 전달
 		// 1. 돌 놓는 위치가 아닌 경우(badPosition) : 사용자에게 알림
@@ -74,12 +76,17 @@ public class Server {
 
 		// 내 turn의 내 돌 색깔만 놓을 수 있음
 		String state = "badPosition";
-		boolean myTurn = Integer.parseInt(session.getId()) + 1 == currentPlayer;
-		if (myTurn) {
-			if (!board.setStone(x, y, currentPlayer)) {
-				state = "badPosition";
+
+		if (!board.setStone(x, y, currentPlayer)) {
+			state = "badPosition";
+		} else {
+			System.out.println("##### setStone메소드 실행 성공");
+			state = board.checkRule(x, y, currentPlayer);
+			if (state == "goodPosition") {
+				System.out.println("state 굿포지션임");
+				board.setStone(x, y, currentPlayer);
 			} else {
-				state = board.checkRule(x, y, currentPlayer);
+				System.out.println("state가 틀려먹었음;;");
 			}
 		}
 
@@ -91,7 +98,9 @@ public class Server {
 		returnObject.put("y", y);
 		returnObject.put("currentPlayer", currentPlayer);
 		returnObject.put("state", state);
-		returnObject.put("myTurn", myTurn);
+		returnObject.put("board", board.getBoard());
+		turn++;
+		returnObject.put("turn", turn);
 		String jsonInfo = returnObject.toString();
 
 		for (Session client : clients) {
@@ -99,7 +108,7 @@ public class Server {
 		}
 	}
 
-	//채팅 메세지일 경우
+	// 채팅 메세지일 경우
 	private void handleChatMessage(JSONObject jsonMessage, Session session) throws IOException {
 		String type = jsonMessage.getString("type");
 		String message = jsonMessage.getString("chatMessage");
@@ -116,13 +125,17 @@ public class Server {
 			}
 		}
 	}
-	
-	//내 정보 보내기
+	public String getCurrentTime() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return now.format(formatter);
+    }
+	// 내 정보 보내기
 	private void handleSessionInfo(JSONObject jsonMessage, Session session) throws IOException {
 		String nickname = jsonMessage.getString("nickname");
 		String profile = jsonMessage.getString("profile");
-		int win = jsonMessage.getInt("win");
-		int lose = jsonMessage.getInt("lose");
+		String win = jsonMessage.getString("win");
+		String lose = jsonMessage.getString("lose");
 
 		JSONObject jsonInfo = new JSONObject();
 		jsonInfo.put("type", "sessionInfo");
@@ -132,14 +145,13 @@ public class Server {
 		jsonInfo.put("lose", lose);
 		String message = jsonInfo.toString();
 
-		System.out.println("내 정보 보내기"+message);
+		System.out.println("내 정보 보내기" + message);
 		for (Session client : clients) {
 			if (!client.equals(session)) {
 				client.getBasicRemote().sendText(message);
 			}
 		}
 	}
-	
 
 	@OnClose
 	public void onClose(Session session) {
