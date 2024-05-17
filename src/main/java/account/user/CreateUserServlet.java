@@ -73,8 +73,8 @@ public class CreateUserServlet extends HttpServlet {
 		// welcome 페이지 삭제, alert후 index.jsp로 이동
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('회원가입이 완료되었습니다. <br>로그인 해주세요.')");
-		out.println("location.href='/omok/index.jsp");
+		out.println("alert('회원가입이 완료되었습니다. <br>로그인 해주세요.');");
+		out.println("location.href='/omok/index.jsp'");
 		out.println("</script>");
 
 	}

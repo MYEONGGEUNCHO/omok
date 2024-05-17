@@ -215,41 +215,56 @@ public class UserDAO {
 	
 	/**
 	 * 마이페이지에서 회원정보를 받아 수정하는 기능
-	 * 
+	 *
 	 * @param userId
 	 * @param pwd
 	 * @param nickname
 	 */
-	public void updateUser(String userId, String pwd, String nickname) {
-	    try {           
+	public void updateUser(String userId, String profile, String nickname, String pwd) {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+
+	    try {
 	        con = dataFactory.getConnection();
-	        if (pwd != "" && nickname != "") {
-	            String query = "update users set pwd = ?, nickname = ?";
+	        con.setAutoCommit(false); // 자동 커밋 비활성화
+
+	        if (!pwd.isEmpty() && !nickname.isEmpty()) {
+	            String query = "update users set pwd = ?, nickname = ? where userId = ?";
 	            pstmt = con.prepareStatement(query);
 	            pstmt.setString(1, pwd);
 	            pstmt.setString(2, nickname);
+	            pstmt.setString(3, userId);
 	            pstmt.executeUpdate();
-	        } else if (pwd != "") {
-	            String query = "update users set pwd = ?";
+	        } else if (!pwd.isEmpty()) {
+	            String query = "update users set pwd = ? where userId = ?";
 	            pstmt = con.prepareStatement(query);
 	            pstmt.setString(1, pwd);
+	            pstmt.setString(2, userId);
 	            pstmt.executeUpdate();
-	        } else if (nickname != "") {
-	            String query = "update users set nickname = ?";
+	        } else if (!nickname.isEmpty()) {
+	            String query = "update users set nickname = ? where userId = ?";
 	            pstmt = con.prepareStatement(query);
 	            pstmt.setString(1, nickname);
+	            pstmt.setString(2, userId);
 	            pstmt.executeUpdate();
 	        }
-	        
+
 	        // updateUser 메서드 내에서 커밋 수행
 	        con.commit();
-	        
+
 	    } catch (Exception e) {
+	        if (con != null) {
+	            try {
+	                con.rollback(); // 오류 발생 시 롤백
+	            } catch (Exception ex) {
+	                ex.printStackTrace();
+	            }
+	        }
 	        e.printStackTrace();
 	    } finally {
-	        // 리소스 해제만 수행
-	        try { pstmt.close(); } catch (Exception e) {}
-	        try { con.close(); } catch (Exception e) {}
+	        // 리소스 해제
+	        try { if (pstmt != null) pstmt.close(); } catch (Exception e) { e.printStackTrace(); }
+	        try { if (con != null) con.close(); } catch (Exception e) { e.printStackTrace(); }
 	    }
 	}
 	public UserVO getPlayer(int roomId) {
