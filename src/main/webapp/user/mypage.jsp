@@ -13,11 +13,10 @@ RankDAO dao = new RankDAO();
 RankVO myRank = dao.myrank(userId);
 %>
 <script>
-	function deleteUser() {
+	function btn_deleteuser() {
 		// form 요소를 직접 찾아서 submit
-		var form = document.getElementById("deleteForm");
-		if (confirm("정말 삭제하시겠습니까??") == true) { // 확인
-			form.submit();
+		if (confirm("정말 삭제하시겠습니까?") == true) { // 확인
+			document.getElementById("deleteUser").submit();
 		} else { // 취소
 			return;
 		}
@@ -61,7 +60,7 @@ RankVO myRank = dao.myrank(userId);
 					</span>
 				</div>
 			</div>
-			<form class="change_profile" action="/omok/updateUser" method="get">
+			<form class="change_profile" action="/omok/updateUser" method="post" id="updateUser">
 				<div>
 					<label id="profile_label">프로필 </label> <select name="profile">
 						<option value='<%=session.getAttribute("profile")%>' disabled>현재 프로필</option>
@@ -81,12 +80,11 @@ RankVO myRank = dao.myrank(userId);
 				<!-- 회원탈퇴 먼가 한번에 못하게 걸어야 할거 같은데 코드리뷰하면서 얘기하기  -->
 				<div class="mypage_buttotns">
 					<!-- form 태그에 ID 추가 -->
-					<form id="deleteForm" action="/omok/deleteUser" method="post">
-						<button type="button" onclick="deleteUser()" name="deleteForm">회원탈퇴</button> <br>
-					</form>
-					<input type="submit" value="변경 내용 저장" />
+					<input type="submit" onclick="updateUser()" value="변경 내용 저장" />
+					<br>
 				</div>
 			</form>
+			
 		</div>
 	</main>
 </body>
