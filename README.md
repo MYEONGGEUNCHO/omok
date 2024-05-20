@@ -4,7 +4,7 @@
 ![Generic badge](https://img.shields.io/badge/JSP-blue.svg)  ![Generic badge](https://img.shields.io/badge/Servlet-orange.svg)  ![Generic badge](https://img.shields.io/badge/Oracle-pink.svg)  ![Generic badge](https://img.shields.io/badge/github-black.svg)  ![Generic badge](https://img.shields.io/badge/git-green.svg) 
 
 
-![](images/main_feat.png)
+![](images/main_feat.png) 
 
 ## 목차  
 1. [프로젝트 구조](#1-프로젝트-구조)  
